@@ -1,5 +1,5 @@
 # Your Product Name
-> Your Group Name
+Quantum Quokkas
 
 > [!NOTE]
 > This repo has been shared with your group. Use it to develop your group project.

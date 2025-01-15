@@ -1,6 +1,6 @@
 const Workshops = () => {
   return (
-    <div>Workshops</div>
+    <div>Workshops Page</div>
   )
 }
 export default Workshops

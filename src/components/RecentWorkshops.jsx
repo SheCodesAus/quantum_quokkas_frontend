@@ -1,5 +1,5 @@
 const RecentWorkshops = () => {
-    return <div>RecentWorkshops</div>;
+    return <div>Recent Workshops</div>;
 };
 export default RecentWorkshops;
 

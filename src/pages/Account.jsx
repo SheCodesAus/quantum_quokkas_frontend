@@ -1,6 +1,6 @@
 const Account = () => {
   return (
-    <div>Account</div>
+    <div>Account Page</div>
   )
 }
 export default Account

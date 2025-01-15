@@ -1,6 +1,6 @@
 const NewNoteForm = () => {
   return (
-    <div>NewNoteForm</div>
+    <div>New Note Form</div>
   )
 }
 export default NewNoteForm

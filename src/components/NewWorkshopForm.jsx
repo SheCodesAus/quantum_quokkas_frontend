@@ -1,6 +1,6 @@
 const NewWorkshopForm = () => {
   return (
-    <div>NewWorkshopForm</div>
+    <div>New Workshop Form</div>
   )
 }
 export default NewWorkshopForm

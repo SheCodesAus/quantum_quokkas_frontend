@@ -1,5 +1,5 @@
 const HeroBanner = () => {
-    return <div>HeroBanner</div>;
+    return <div>Hero Component</div>;
 };
 export default HeroBanner;
 

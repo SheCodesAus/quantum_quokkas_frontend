@@ -24,6 +24,9 @@ export default {
                 'subtext': ['Roboto', 'serif'],
                 'note': ['Indie Flower'],
             },
+            backgroundImage: {
+                'hero' : "url('/custom-btns/orange-note.png')",
+            }
         },
     },
     plugins: [],

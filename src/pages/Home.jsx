@@ -4,7 +4,7 @@ import RecentWorkshops from '../components/RecentWorkshops'
 
 const Home = () => {
   return (
-    <main>
+    <main className='min-h-screen'>
       <HeroBanner />
       <About />
       <RecentWorkshops />

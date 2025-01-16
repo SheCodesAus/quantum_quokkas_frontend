@@ -11,7 +11,7 @@ import hamburger from '/custom-btns/hamburger.png';
 import close from '/custom-btns/close.png';
 
 const Nav = () => {
-    const [showNav, setShowNav] = useState(true);
+    const [showNav, setShowNav] = useState(false);
     const [loggedIn, setLoggedIn] = useState(true);
     const handleClick = () => setShowNav(!showNav);
 
@@ -160,7 +160,7 @@ const Nav = () => {
                     </section>
                 </section>
             </nav>
-            <section className='border-pink-200 border-2 md:hidden'>
+            <section className='md:hidden'>
                 <Outlet />
             </section>
         </main>

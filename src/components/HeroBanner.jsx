@@ -19,7 +19,7 @@ const HeroBanner = () => {
 
     return (
         <section>
-            <article className='bg-hero bg-cover size-80 font-note text-xl flex flex-col justify-center items-center mx-auto'>
+            <article className='bg-hero bg-cover size-80 font-note text-xl flex flex-col justify-center items-center mx-auto md:mx-0'>
                 <div className='p-6 mt-14 h-full flex flex-col justify-between'>
                     <p className='max-w-[90%]'>{notes[index]?.content}</p>
                     <p className='text-2xl'>- {notes[index]?.user}</p>

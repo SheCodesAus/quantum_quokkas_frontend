@@ -18,65 +18,87 @@ const Nav = () => {
     return (
         <main className='min-h-screen flex flex-col md:flex-row bg-pink-50'>
             {/* Outlet Container */}
-            <section className='hidden md:block'>
+            {/* <section className='hidden md:block'>
                 <Outlet />
-            </section>
+            </section> */}
             <nav>
                 {/* Desktop Menu */}
-                <section className='hidden md:flex flex-col fixed right-0 h-full justify-evenly items-center p-4 overflow-y-auto'>
-                        <Link to='/'>
-                            <div className='size-24 border-2 bg-gray-300 flex items-center justify-center'>
-                                logo
-                            </div>
-                        </Link>
-                        <Link to='/'>
-                            <img
-                                src={home}
-                                alt='Blue cartoon-style illustration of a post-it note'
-                                className='w-24'
-                            />
-                        </Link>
-                        <Link to='/workshops'>
-                            <img
-                                src={workshops}
-                                alt='Pink cartoon-style illustration of a post-it note'
-                                className='w-24'
-                            ></img>
-                        </Link>
+                <section className='hidden md:flex flex-col fixed left-0 h-full space-y-6 lg:space-y-2 p-3 overflow-y-auto w-48'>
+                    <Link to='/'>
+                        <div className='size-20 bg-gray-300 flex items-center justify-center mx-auto'>
+                            logo
+                        </div>
+                    </Link>
+                    <div className='flex items-center'>
+                        <h1 className='font-subtext text-4xl'>post</h1>
+                        <h1 className='font-subtext text-6xl p-1.5 mb-2 border-b border-black'>
+                            it
+                        </h1>
+                        <h1 className='font-subtext text-4xl'>ivity</h1>
+                    </div>
+                    <Link to='/'>
+                        <img
+                            src={home}
+                            alt='Blue cartoon-style illustration of a post-it note'
+                            className='w-24'
+                        />
+                    </Link>
+                    <Link to='/workshops'>
+                        <img
+                            src={workshops}
+                            alt='Pink cartoon-style illustration of a post-it note'
+                            className='w-24'
+                        ></img>
+                    </Link>
 
-                        <Link to='/login'>
-                            <img
-                                src={postnote}
-                                alt='Yellow cartoon-style illustration of a post-it note'
-                                className='w-24'
-                            />
-                        </Link>
+                    <Link to='/login'>
+                        <img
+                            src={postnote}
+                            alt='Yellow cartoon-style illustration of a post-it note'
+                            className='w-24'
+                        />
+                    </Link>
 
-                        <Link to='/login'>
-                            <img
-                                src={login}
-                                alt='Purple cartoon-style illustration of a post-it note'
-                                className='w-24'
-                            />
-                        </Link>
+                    <Link to='/login'>
+                        <img
+                            src={login}
+                            alt='Purple cartoon-style illustration of a post-it note'
+                            className='w-24'
+                        />
+                    </Link>
 
-                        <Link to='/signup'>
-                            <img
-                                src={signup}
-                                alt='Green cartoon-style illustration of a post-it note'
-                                className='w-24'
-                            />
-                        </Link>
+                    <Link to='/signup'>
+                        <img
+                            src={signup}
+                            alt='Green cartoon-style illustration of a post-it note'
+                            className='w-24'
+                        />
+                    </Link>
                 </section>
 
-                {/* Hamburger */}
-                <button onClick={handleClick} className='md:hidden w-full p-2'>
-                    {showNav ? (
-                        <img src={close} className='w-10 ml-auto mt-2 mr-2' />
-                    ) : (
-                        <img src={hamburger} className='w-20 ml-auto' />
-                    )}
-                </button>
+                <div className='flex items-center h-24'>
+                    <h1 className='font-subtext text-4xl ml-6 md:hidden'>
+                        post
+                    </h1>
+                    <h1 className='font-subtext text-6xl p-1.5 mb-2 md:hidden'>
+                        it
+                    </h1>
+                    <h1 className='font-subtext text-4xl md:hidden'>ivity</h1>
+                    {/* Hamburger */}
+                    <button
+                        onClick={handleClick}
+                        className='md:hidden w-full p-2 focus-visible:none'
+                    >
+                        {showNav ? (
+                            <img
+                                src={close}
+                                className='w-10 ml-auto mt-2 mr-2'
+                            />
+                        ) : (
+                            <img src={hamburger} className='w-20 ml-auto' />
+                        )}
+                    </button>
+                </div>
 
                 {/* Mobile Menu */}
                 <section
@@ -160,7 +182,7 @@ const Nav = () => {
                     </section>
                 </section>
             </nav>
-            <section className='md:hidden'>
+            <section className='min-h-screen md:ml-52 md:p-8'>
                 <Outlet />
             </section>
         </main>

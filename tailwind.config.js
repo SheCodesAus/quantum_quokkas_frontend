@@ -20,12 +20,12 @@ export default {
                 'red-dark': '#C4391D',
             },
             fontFamily: {
-                'head': ['Geist'],
-                'subtext': ['Roboto', 'serif'],
+                'main': ['Inter'],
+                'accent': ['Shadows Into Light Two'],
                 'note': ['Indie Flower'],
             },
             backgroundImage: {
-                'hero' : "url('/custom-btns/orange-note.png')",
+                'hero' : "url('/note-icons/newnote.png')",
             }
         },
     },

@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
-import home from '/custom-btns/home.png';
-import workshops from '/custom-btns/workshops.png';
-import postnote from '/custom-btns/postnote.png';
-import login from '/custom-btns/login.png';
-import signup from '/custom-btns/signup.png';
-import account from '/custom-btns/account.png';
-import logout from '/custom-btns/logout.png';
+import home from '/note-icons/home.png';
+import workshops from '/note-icons/workshops.png';
+import postnote from '/note-icons/postnote.png';
+import login from '/note-icons/login.png';
+import signup from '/note-icons/signup.png';
+import account from '/note-icons/account.png';
+import logout from '/note-icons/logout.png';
 import hamburger from '/custom-btns/hamburger.png';
 import close from '/custom-btns/close.png';
-import logo from '/images/logo.png';
+import logo from '/logo/logo.png';
 
 const Nav = () => {
     const [showNav, setShowNav] = useState(false);
@@ -24,11 +24,11 @@ const Nav = () => {
                     <Link to='/'>
                         <img className='w-60' src={logo} alt='' />
                     </Link>
-                    <div className='flex bg-pink-50/90 h-20 items-center font-head text-lg w-full justify-evenly'>
+                    <div className='flex bg-pink-50/90 h-20 items-center font-accent text-2xl w-full justify-evenly'>
                         <NavLink
                             className={({ isActive }) =>
                                 isActive
-                                    ? 'border-[1px] py-1.5 px-2 rounded border-purple-light'
+                                    ? 'border-[1px] py-1.5 px-2 rounded border-purple-dark'
                                     : 'border-[1px] py-1.5 px-2 border-transparent'
                             }
                             to='/'
@@ -38,7 +38,7 @@ const Nav = () => {
                         <NavLink
                             className={({ isActive }) =>
                                 isActive
-                                    ? 'border-[1px] p-1.5 rounded border-blue-light'
+                                    ? 'border-[1px] p-1.5 rounded border-blue-dark'
                                     : 'border-[1px] p-1.5 border-transparent'
                             }
                             to='/workshops'
@@ -107,7 +107,6 @@ const Nav = () => {
 
                 {/* Mobile Menu Buttons */}
                 <div className='flex items-start'>
-
                     {/* Logo */}
                     <Link
                         onClick={() => setShowNav(false)}
@@ -123,7 +122,10 @@ const Nav = () => {
                         className='md:hidden w-full p-2 focus-visible:none'
                     >
                         {showNav ? (
-                            <img src={close} className='w-10 ml-auto mr-4 mt-6' />
+                            <img
+                                src={close}
+                                className='w-10 ml-auto mr-4 mt-6'
+                            />
                         ) : (
                             <img
                                 src={hamburger}
@@ -248,7 +250,7 @@ const Nav = () => {
                     </section>
                 </section>
             </nav>
-            <section className='min-h-screen md:mt-24 md:ml-48 md:p-8'>
+            <section className='min-h-screen mt-10 md:mt-36 md:ml-44 lg:mt-32 lg:ml-52 xl:ml-60'>
                 <Outlet />
             </section>
         </main>

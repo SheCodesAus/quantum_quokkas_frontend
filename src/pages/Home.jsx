@@ -1,12 +1,12 @@
-import About from '../components/About'
-import RecentWorkshops from '../components/RecentWorkshops'
+import About from '../components/About';
+import RecentWorkshops from '../components/RecentWorkshops';
 
 const Home = () => {
-  return (
-    <>
-      <About />
-      <RecentWorkshops />
-    </>
-  )
-}
-export default Home
+    return (
+        <main className='md:mt-8 md:ml-44 lg:ml-52 xl:ml-60'>
+            <About />
+            <RecentWorkshops />
+        </main>
+    );
+};
+export default Home;

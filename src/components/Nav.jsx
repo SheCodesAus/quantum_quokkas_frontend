@@ -13,7 +13,7 @@ import logo from '/logo/logo.png';
 
 const Nav = () => {
     const [showNav, setShowNav] = useState(false);
-    const [loggedIn, setLoggedIn] = useState(true);
+    const [loggedIn, setLoggedIn] = useState(false);
     const handleClick = () => setShowNav(!showNav);
 
     return (
@@ -38,7 +38,7 @@ const Nav = () => {
                         <NavLink
                             className={({ isActive }) =>
                                 isActive
-                                    ? 'border-[1px] p-1.5 rounded border-blue-dark'
+                                    ? 'border-[1px] p-1.5 rounded border-pink-dark'
                                     : 'border-[1px] p-1.5 border-transparent'
                             }
                             to='/workshops'
@@ -60,7 +60,7 @@ const Nav = () => {
                                 <NavLink
                                     className={({ isActive }) =>
                                         isActive
-                                            ? 'border-[1px] p-1.5 rounded border-blue-light'
+                                            ? 'border-[1px] p-1.5 rounded border-purple-dark'
                                             : 'border-[1px] p-1.5 border-transparent'
                                     }
                                     to='/login'
@@ -70,7 +70,7 @@ const Nav = () => {
                                 <NavLink
                                     className={({ isActive }) =>
                                         isActive
-                                            ? 'border-[1px] p-1.5 rounded border-pink-light'
+                                            ? 'border-[1px] p-1.5 rounded border-green-dark'
                                             : 'border-[1px] p-1.5 border-transparent'
                                     }
                                     to='/signup'
@@ -250,7 +250,7 @@ const Nav = () => {
                     </section>
                 </section>
             </nav>
-            <section className='min-h-screen mt-10 md:mt-36 md:ml-44 lg:mt-32 lg:ml-52 xl:ml-60'>
+            <section className='min-h-screen mt-10 md:mt-36 lg:mt-20'>
                 <Outlet />
             </section>
         </main>

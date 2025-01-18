@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import home from '/custom-btns/home.png';
 import workshops from '/custom-btns/workshops.png';
 import postnote from '/custom-btns/postnote.png';
@@ -9,6 +9,7 @@ import account from '/custom-btns/account.png';
 import logout from '/custom-btns/logout.png';
 import hamburger from '/custom-btns/hamburger.png';
 import close from '/custom-btns/close.png';
+import logo from '/images/logo.png';
 
 const Nav = () => {
     const [showNav, setShowNav] = useState(false);
@@ -16,106 +17,118 @@ const Nav = () => {
     const handleClick = () => setShowNav(!showNav);
 
     return (
-        <main className='min-h-screen flex flex-col md:flex-row bg-pink-50'>
-            {/* Outlet Container */}
-            {/* <section className='hidden md:block'>
-                <Outlet />
-            </section> */}
+        <main className='min-h-screen flex flex-col bg-pink-50'>
             <nav>
                 {/* Desktop Menu */}
-                <section className='hidden md:flex flex-col fixed left-0 h-full space-y-6 lg:space-y-2 p-3 overflow-y-auto w-48'>
+                <section className='hidden md:flex fixed left-0 w-full'>
                     <Link to='/'>
-                        <div className='size-20 bg-gray-300 flex items-center justify-center mx-auto'>
-                            logo
-                        </div>
+                        <img className='w-60' src={logo} alt='' />
                     </Link>
-                    <div className='flex items-center'>
-                        <h1 className='font-subtext text-4xl'>post</h1>
-                        <h1 className='font-subtext text-6xl p-1.5 mb-2 border-b border-black'>
-                            it
-                        </h1>
-                        <h1 className='font-subtext text-4xl'>ivity</h1>
+                    <div className='flex bg-pink-50/90 h-20 items-center font-head text-lg w-full justify-evenly'>
+                        <NavLink
+                            className={({ isActive }) =>
+                                isActive
+                                    ? 'border-[1px] py-1.5 px-2 rounded border-purple-light'
+                                    : 'border-[1px] py-1.5 px-2 border-transparent'
+                            }
+                            to='/'
+                        >
+                            Home
+                        </NavLink>
+                        <NavLink
+                            className={({ isActive }) =>
+                                isActive
+                                    ? 'border-[1px] p-1.5 rounded border-blue-light'
+                                    : 'border-[1px] p-1.5 border-transparent'
+                            }
+                            to='/workshops'
+                        >
+                            Workshops
+                        </NavLink>
+                        <NavLink
+                            className={({ isActive }) =>
+                                isActive
+                                    ? 'border-[1px] p-1.5 rounded border-yellow-dark'
+                                    : 'border-[1px] p-1.5 border-transparent'
+                            }
+                            to='/login'
+                        >
+                            Post-A-Note
+                        </NavLink>
+                        {!loggedIn ? (
+                            <>
+                                <NavLink
+                                    className={({ isActive }) =>
+                                        isActive
+                                            ? 'border-[1px] p-1.5 rounded border-blue-light'
+                                            : 'border-[1px] p-1.5 border-transparent'
+                                    }
+                                    to='/login'
+                                >
+                                    Log In
+                                </NavLink>
+                                <NavLink
+                                    className={({ isActive }) =>
+                                        isActive
+                                            ? 'border-[1px] p-1.5 rounded border-pink-light'
+                                            : 'border-[1px] p-1.5 border-transparent'
+                                    }
+                                    to='/signup'
+                                >
+                                    Sign Up
+                                </NavLink>
+                            </>
+                        ) : (
+                            <>
+                                <NavLink
+                                    className={({ isActive }) =>
+                                        isActive
+                                            ? 'border-[1px] p-1.5 rounded border-green-dark'
+                                            : 'border-[1px] p-1.5 border-transparent'
+                                    }
+                                    to='/account'
+                                >
+                                    Account
+                                </NavLink>
+                                <NavLink
+                                    // className={({ isActive }) =>
+                                    //     isActive
+                                    //         ? 'border-[1px] p-1.5 rounded border-purple-light'
+                                    //         : 'border-[1px] p-1.5 border-transparent'
+                                    // }
+                                    to='/'
+                                >
+                                    Log Out
+                                </NavLink>
+                            </>
+                        )}
                     </div>
-                    <Link to='/'>
-                        <img
-                            src={home}
-                            alt='Blue cartoon-style illustration of a post-it note'
-                            className='w-24'
-                        />
-                    </Link>
-                    <Link to='/workshops'>
-                        <img
-                            src={workshops}
-                            alt='Pink cartoon-style illustration of a post-it note'
-                            className='w-24'
-                        ></img>
-                    </Link>
-
-                    <Link to='/login'>
-                        <img
-                            src={postnote}
-                            alt='Yellow cartoon-style illustration of a post-it note'
-                            className='w-24'
-                        />
-                    </Link>
-                    {!loggedIn ? (
-                        <>
-                            <Link to='/login'>
-                                <img
-                                    src={login}
-                                    alt='Purple cartoon-style illustration of a post-it note'
-                                    className='w-24'
-                                />
-                            </Link>
-
-                            <Link to='/signup'>
-                                <img
-                                    src={signup}
-                                    alt='Green cartoon-style illustration of a post-it note'
-                                    className='w-24'
-                                />
-                            </Link>
-                        </>
-                    ) : (
-                        <>
-                            <Link to='/account'>
-                                <img
-                                    src={account}
-                                    alt='Purple cartoon-style illustration of a post-it note'
-                                    className='w-24'
-                                />
-                            </Link>
-                            <Link to='/'>
-                                <img
-                                    src={logout}
-                                    alt='Green cartoon-style illustration of a post-it note'
-                                    className='w-24'
-                                />
-                            </Link>
-                        </>
-                    )}
                 </section>
 
-                <div className='flex items-center h-24'>
-                    <h1 className='font-subtext text-4xl ml-6 md:hidden'>
-                        post
-                    </h1>
-                    <h1 className='font-subtext text-6xl p-1.5 mb-2 md:hidden'>
-                        it
-                    </h1>
-                    <h1 className='font-subtext text-4xl md:hidden'>ivity</h1>
+                {/* Mobile Menu Buttons */}
+                <div className='flex items-start'>
+
+                    {/* Logo */}
+                    <Link
+                        onClick={() => setShowNav(false)}
+                        to='/'
+                        className='pl-3 md:hidden'
+                    >
+                        <img className='w-52' src={logo} alt='' />
+                    </Link>
+
                     {/* Hamburger */}
                     <button
                         onClick={handleClick}
                         className='md:hidden w-full p-2 focus-visible:none'
                     >
                         {showNav ? (
-                            <img
-                                src={close}
-                                className='w-10 ml-auto mt-2 mr-2'
-                            />
+                            <img src={close} className='w-10 ml-auto mr-4 mt-6' />
                         ) : (
-                            <img src={hamburger} className='w-20 ml-auto' />
+                            <img
+                                src={hamburger}
+                                className='w-20 ml-auto mr-2 mt-3.5'
+                            />
                         )}
                     </button>
                 </div>
@@ -126,83 +139,116 @@ const Nav = () => {
                         showNav ? 'min-h-screen' : 'hidden'
                     } md:hidden p-6`}
                 >
-                    <section className='grid grid-cols-2 place-items-center gap-y-10'>
-                        <Link to='/' className='col-span-2'>
+                    <section className='grid grid-cols-2 w-4/5 mx-auto'>
+                        {/* Logo */}
+                        <Link
+                            onClick={handleClick}
+                            className='col-start-1 -skew-y-12 skew-x-12'
+                            to='/'
+                        >
                             <img
                                 src={home}
                                 alt='Blue cartoon-style illustration of a post-it note'
-                                className='w-32'
+                                className='w-28'
                             />
                         </Link>
-                        <Link to='/workshops'>
+
+                        {/* Workshops */}
+                        <Link
+                            onClick={handleClick}
+                            className='row-start-2 col-start-2  -skew-x-12 skew-y-12'
+                            to='/workshops'
+                        >
                             <img
                                 src={workshops}
                                 alt='Pink cartoon-style illustration of a post-it note'
-                                className='w-32'
+                                className='w-28'
                             ></img>
                         </Link>
                         {!loggedIn ? (
                             <>
-                                <Link to='/login'>
+                                {/* Post Note */}
+                                <Link
+                                    onClick={handleClick}
+                                    className='row-start-3 -skew-y-12 skew-x-12'
+                                    to='/login'
+                                >
                                     <img
                                         src={postnote}
                                         alt='Yellow cartoon-style illustration of a post-it note'
-                                        className='w-32'
+                                        className='w-28'
                                     />
                                 </Link>
 
-                                <Link to='/login'>
+                                {/* Log In */}
+                                <Link
+                                    onClick={handleClick}
+                                    className='row-start-4 col-start-2  -skew-x-12 skew-y-12'
+                                    to='/login'
+                                >
                                     <img
                                         src={login}
                                         alt='Purple cartoon-style illustration of a post-it note'
-                                        className='w-32'
+                                        className='w-28'
                                     />
                                 </Link>
 
-                                <Link to='/signup'>
+                                {/* Sign Up */}
+                                <Link
+                                    onClick={handleClick}
+                                    className='row-start-5  -skew-y-12 skew-x-12'
+                                    to='/signup'
+                                >
                                     <img
                                         src={signup}
                                         alt='Green cartoon-style illustration of a post-it note'
-                                        className='w-32'
+                                        className='w-28'
                                     />
                                 </Link>
                             </>
                         ) : (
                             <>
-                                <Link to='/newnote'>
+                                <Link
+                                    onClick={handleClick}
+                                    className='row-start-3 -skew-y-12 skew-x-12'
+                                    to='/newnote'
+                                >
                                     <img
                                         src={postnote}
                                         alt='Yellow cartoon-style illustration of a post-it note'
-                                        className='w-32'
+                                        className='w-28'
                                     />
                                 </Link>
 
-                                <Link to='/account'>
+                                <Link
+                                    onClick={handleClick}
+                                    className='row-start-4 col-start-2 -skew-x-12 skew-y-12'
+                                    to='/account'
+                                >
                                     <img
                                         src={account}
                                         alt='Purple cartoon-style illustration of a post-it note'
-                                        className='w-32'
+                                        className='w-28'
                                     />
                                 </Link>
 
-                                <Link to='/'>
+                                <Link
+                                    onClick={handleClick}
+                                    className='row-start-5 -skew-y-12 skew-x-12'
+                                    to='/'
+                                >
                                     <img
                                         src={logout}
                                         alt='Green cartoon-style illustration of a post-it note'
-                                        className='w-32'
+                                        className='w-28'
                                     />
                                 </Link>
                             </>
                         )}
-                        <Link to='/' className='col-span-2'>
-                            <div className='size-32 border-2 bg-gray-300 flex items-center justify-center'>
-                                logo
-                            </div>
-                        </Link>
                     </section>
                 </section>
             </nav>
-            <section className='min-h-screen md:ml-52 md:p-8'>
+            <section className='min-h-screen md:mt-24 md:ml-48 md:p-8'>
                 <Outlet />
             </section>
         </main>

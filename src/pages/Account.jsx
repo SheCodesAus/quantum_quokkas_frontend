@@ -5,7 +5,7 @@ import UsersWorkshops from '../components/UsersWorkshops';
 const Account = () => {
     return (
         <main>
-            <h1 className='font-head text-3xl text-center'>
+            <h1 className='font-main text-3xl text-center'>
                 Welcome, username
             </h1>
             <section className='flex p-6 w-full justify-between text-lg'>

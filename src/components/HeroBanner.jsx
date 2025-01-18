@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { notes } from '../utils/notes-data';
-import noteBg from '/custom-btns/newnote.png';
 
 const HeroBanner = () => {
     const [index, setIndex] = useState(0);
@@ -18,14 +17,14 @@ const HeroBanner = () => {
     }, [notes]);
 
     return (
-        <section>
-            <article className='bg-hero bg-cover size-80 font-note text-xl flex flex-col justify-center items-center mx-auto md:mx-0'>
-                <div className='p-6 mt-14 h-full flex flex-col justify-between'>
-                    <p className='max-w-[90%]'>{notes[index]?.content}</p>
-                    <p className='text-2xl'>- {notes[index]?.user}</p>
-                </div>
-            </article>
-        </section>
+        <article className='bg-hero bg-cover size-80 flex flex-col justify-center items-center mx-auto md:mx-10 lg:mx-0 xl:mx-auto md:size-96'>
+            <div className='p-6 mt-14 md:mt-20 md:ml-4 h-full flex flex-col justify-between font-note'>
+                <p className='max-w-[90%] text-xl md:text-2xl'>
+                    {notes[index]?.content}
+                </p>
+                <p className='text-2xl md:text-3xl'>- {notes[index]?.user}</p>
+            </div>
+        </article>
     );
 };
 export default HeroBanner;

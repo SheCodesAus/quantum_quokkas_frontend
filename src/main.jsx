@@ -13,6 +13,9 @@ import Workshops from './pages/Workshops';
 import Workshop from './pages/Workshop';
 import NewNote from './pages/NewNote';
 import NewWorkshop from './pages/NewWorkshop';
+import UsersNotes from './components/UsersNotes';
+import UsersWorkshops from './components/UsersWorkshops';
+import EditProfile from './components/EditProfile';
 
 const router = createBrowserRouter([
     {
@@ -20,7 +23,15 @@ const router = createBrowserRouter([
         element: <Nav />,
         children: [
             { path: '/', element: <Home /> },
-            { path: '/account', element: <Account /> },
+            {
+                path: '/account',
+                element: <Account />,
+                children: [
+                    { path: '/account/notes', element: <UsersNotes /> },
+                    { path: '/account/workshops', element: <UsersWorkshops /> },
+                    { path: '/account/editprofile', element: <EditProfile /> },
+                ],
+            },
             { path: '/login', element: <Login /> },
             { path: '/signup', element: <Signup /> },
             { path: '/newworkshop', element: <NewWorkshop /> },

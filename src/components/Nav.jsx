@@ -58,22 +58,42 @@ const Nav = () => {
                             className='w-24'
                         />
                     </Link>
+                    {!loggedIn ? (
+                        <>
+                            <Link to='/login'>
+                                <img
+                                    src={login}
+                                    alt='Purple cartoon-style illustration of a post-it note'
+                                    className='w-24'
+                                />
+                            </Link>
 
-                    <Link to='/login'>
-                        <img
-                            src={login}
-                            alt='Purple cartoon-style illustration of a post-it note'
-                            className='w-24'
-                        />
-                    </Link>
-
-                    <Link to='/signup'>
-                        <img
-                            src={signup}
-                            alt='Green cartoon-style illustration of a post-it note'
-                            className='w-24'
-                        />
-                    </Link>
+                            <Link to='/signup'>
+                                <img
+                                    src={signup}
+                                    alt='Green cartoon-style illustration of a post-it note'
+                                    className='w-24'
+                                />
+                            </Link>
+                        </>
+                    ) : (
+                        <>
+                            <Link to='/account'>
+                                <img
+                                    src={account}
+                                    alt='Purple cartoon-style illustration of a post-it note'
+                                    className='w-24'
+                                />
+                            </Link>
+                            <Link to='/'>
+                                <img
+                                    src={logout}
+                                    alt='Green cartoon-style illustration of a post-it note'
+                                    className='w-24'
+                                />
+                            </Link>
+                        </>
+                    )}
                 </section>
 
                 <div className='flex items-center h-24'>

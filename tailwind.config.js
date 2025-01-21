@@ -25,7 +25,7 @@ export default {
                 'note': ['Indie Flower'],
             },
             backgroundImage: {
-                'hero' : "url('/note-icons/newnote.png')",
+                'hero' : "url('/note-icons/purple.png')",
             }
         },
     },

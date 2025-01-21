@@ -26,6 +26,7 @@ export default {
             },
             backgroundImage: {
                 'hero' : "url('/note-icons/purple.png')",
+                'note' : "url('/note-icons/pink-blank.png')",
             }
         },
     },

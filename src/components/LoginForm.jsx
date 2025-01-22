@@ -24,6 +24,8 @@ function LoginForm() {
             postLogin(credentials.username, credentials.password).then(
                 (response) => {
                     window.localStorage.setItem('token', response.token);
+                    window.localStorage.setItem('user_id', response.user_id);
+                    window.localStorage.setItem('first_name', response.first_name);
                     navigate('/');
                 }
             );

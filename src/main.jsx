@@ -38,7 +38,7 @@ const router = createBrowserRouter([
             { path: '/signup', element: <Signup /> },
             { path: '/newworkshop', element: <NewWorkshop /> },
             { path: '/newnote', element: <NewNote /> },
-            { path: '/workshop', element: <Workshop /> },
+            { path: '/workshop/:id', element: <Workshop /> },
             { path: '/workshops', element: <Workshops /> },
         ],
     },

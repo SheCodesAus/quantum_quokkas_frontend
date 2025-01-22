@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
+import { useAuth } from '../hooks/use-auth';
+
 import home from '/note-icons/home.png';
 import workshops from '/note-icons/workshops.png';
 import postnote from '/note-icons/postnote.png';
@@ -12,6 +14,11 @@ import close from '/custom-btns/close.png';
 import logo from '/logo/logo.png';
 
 const Nav = () => {
+    const { auth, setAuth } = useAuth();
+    const handleLogout = () => {
+        window.localStorage.removeItem('token');
+        setAuth({ token: null });
+    };
     const [showNav, setShowNav] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
     const handleClick = () => setShowNav(!showNav);
@@ -35,6 +42,25 @@ const Nav = () => {
                         >
                             Home
                         </NavLink>
+                        {auth.token ? (
+                            <NavLink
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? 'border-[1px] p-1.5 rounded border-yellow-dark'
+                                        : 'border-[1px] p-1.5 border-transparent'
+                                }
+                                to='/postnote'
+                            >
+                                Post-A-Note
+                            </NavLink>
+                        ) : (
+                            <NavLink
+                                className='border-[1px] p-1.5 border-transparent'
+                                to='/login'
+                            >
+                                Post-A-Note
+                            </NavLink>
+                        )}
                         <NavLink
                             className={({ isActive }) =>
                                 isActive
@@ -45,17 +71,7 @@ const Nav = () => {
                         >
                             Workshops
                         </NavLink>
-                        <NavLink
-                            className={({ isActive }) =>
-                                isActive
-                                    ? 'border-[1px] p-1.5 rounded border-yellow-dark'
-                                    : 'border-[1px] p-1.5 border-transparent'
-                            }
-                            to='/login'
-                        >
-                            Post-A-Note
-                        </NavLink>
-                        {!loggedIn ? (
+                        {!auth.token ? (
                             <>
                                 <NavLink
                                     className={({ isActive }) =>
@@ -90,14 +106,7 @@ const Nav = () => {
                                 >
                                     Account
                                 </NavLink>
-                                <NavLink
-                                    // className={({ isActive }) =>
-                                    //     isActive
-                                    //         ? 'border-[1px] p-1.5 rounded border-purple-light'
-                                    //         : 'border-[1px] p-1.5 border-transparent'
-                                    // }
-                                    to='/'
-                                >
+                                <NavLink onClick={handleLogout} to='/'>
                                     Log Out
                                 </NavLink>
                             </>

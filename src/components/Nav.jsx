@@ -49,7 +49,7 @@ const Nav = () => {
                                         ? 'border-[1px] p-1.5 rounded border-yellow-dark'
                                         : 'border-[1px] p-1.5 border-transparent'
                                 }
-                                to='/postnote'
+                                to='/newnote'
                             >
                                 Post-A-Note
                             </NavLink>
@@ -64,7 +64,7 @@ const Nav = () => {
                         <NavLink
                             className={({ isActive }) =>
                                 isActive
-                                    ? 'border-[1px] p-1.5 rounded border-pink-dark'
+                                    ? 'border-[1px] p-1.5 rounded border-orange-dark/60'
                                     : 'border-[1px] p-1.5 border-transparent'
                             }
                             to='/workshops'
@@ -76,7 +76,7 @@ const Nav = () => {
                                 <NavLink
                                     className={({ isActive }) =>
                                         isActive
-                                            ? 'border-[1px] p-1.5 rounded border-purple-dark'
+                                            ? 'border-[1px] p-1.5 rounded border-blue-dark/80'
                                             : 'border-[1px] p-1.5 border-transparent'
                                     }
                                     to='/login'
@@ -86,7 +86,7 @@ const Nav = () => {
                                 <NavLink
                                     className={({ isActive }) =>
                                         isActive
-                                            ? 'border-[1px] p-1.5 rounded border-green-dark'
+                                            ? 'border-[1px] p-1.5 rounded border-pink-dark'
                                             : 'border-[1px] p-1.5 border-transparent'
                                     }
                                     to='/signup'
@@ -176,7 +176,7 @@ const Nav = () => {
                                 className='w-28'
                             ></img>
                         </Link>
-                        {!loggedIn ? (
+                        {!auth.token ? (
                             <>
                                 {/* Post Note */}
                                 <Link

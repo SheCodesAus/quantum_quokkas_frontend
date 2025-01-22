@@ -65,7 +65,7 @@ function SignupForm() {
                     type='text'
                     id='username'
                     onChange={handleChange}
-                    className='p-1.5 bg-green-light/70 focus-visible:outline-1 focus-visible:outline-green-dark rounded w-11/12 ml-4 mb-3 md:p-3'
+                    className='p-1.5 bg-pink-light/70 focus-visible:outline-1 focus-visible:outline-pink-dark rounded w-11/12 ml-4 mb-3 md:p-3'
                 />
 
                 {/* Email */}
@@ -76,7 +76,7 @@ function SignupForm() {
                     type='email'
                     id='email'
                     onChange={handleChange}
-                    className='p-1.5 bg-green-light/70 focus-visible:outline-1 focus-visible:outline-green-dark rounded w-11/12 ml-4 mb-3 md:p-3'
+                    className='p-1.5 bg-pink-light/70 focus-visible:outline-1 focus-visible:outline-pink-dark rounded w-11/12 ml-4 mb-3 md:p-3'
                 />
 
                 {/* Password */}
@@ -87,7 +87,7 @@ function SignupForm() {
                     type='password'
                     id='password'
                     onChange={handleChange}
-                    className='p-1.5 bg-green-light/70 focus-visible:outline-1 focus-visible:outline-green-dark rounded w-11/12 ml-4 mb-3 md:p-3'
+                    className='p-1.5 bg-pink-light/70 focus-visible:outline-1 focus-visible:outline-pink-dark rounded w-11/12 ml-4 mb-3 md:p-3'
                 />
 
                 <label className='mb-1.5' htmlFor='confirmPassword'>
@@ -97,11 +97,11 @@ function SignupForm() {
                     type='password'
                     id='confirmPassword'
                     onChange={handleChange}
-                    className='p-1.5 bg-green-light/70 focus-visible:outline-1 focus-visible:outline-green-dark rounded w-11/12 ml-4 mb-8 md:p-3'
+                    className='p-1.5 bg-pink-light/70 focus-visible:outline-1 focus-visible:outline-pink-dark rounded w-11/12 ml-4 mb-8 md:p-3'
                 />
 
                 <button
-                    className='w-fit mx-auto py-2 px-6 rounded bg-green-dark font-bold font-accent text-2xl shadow-md shadow-green-dark mb-5 md:text-4xl lg:text-3xl'
+                    className='w-fit mx-auto py-2 px-6 rounded bg-pink-dark font-bold font-accent text-2xl shadow-md shadow-pink-dark mb-5 md:text-4xl lg:text-3xl'
                     type='submit'
                 >
                     Sign Up

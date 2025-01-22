@@ -5,7 +5,7 @@ const About = () => {
         <main className='space-y-8 lg:w-[850px] xl:w-[1000px] lg:grid grid-cols-2'>
             <h1 className='font-main font-light text-2xl w-11/12 mx-auto md:text-3xl lg:w-3/5 lg:ml-10 col-span-2'>
                 Welcome to post
-                <span className='font-accent text-4xl ml-1 mr-0.5'>it</span>
+                <span className='font-accent text-4xl ml-1 mr-1'>it</span>
                 ivity, where <span className='font-bold'>every</span> success is
                 celebrated, no matter how small.
             </h1>

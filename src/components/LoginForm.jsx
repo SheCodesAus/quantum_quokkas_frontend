@@ -62,7 +62,7 @@ function LoginForm() {
                     id='username'
                     onChange={handleChange}
                     autoCapitalize='none'
-                    className='p-1.5 bg-purple-light/40 focus-visible:outline-1 focus-visible:outline-purple-light rounded w-11/12 ml-4 mb-8 md:p-3'
+                    className='p-1.5 bg-blue-light/40 focus-visible:outline-1 focus-visible:outline-blue-light rounded w-11/12 ml-4 mb-8 md:p-3'
                 />
 
                 {/* Password */}
@@ -73,11 +73,11 @@ function LoginForm() {
                     type='password'
                     id='password'
                     onChange={handleChange}
-                    className='p-1.5 bg-purple-light/40 focus-visible:outline-1 focus-visible:outline-purple-light rounded w-11/12 ml-4 mb-8 md:p-3'
+                    className='p-1.5 bg-blue-light/40 focus-visible:outline-1 focus-visible:outline-blue-light rounded w-11/12 ml-4 mb-8 md:p-3'
                 />
 
                 <button
-                    className='w-fit mx-auto py-2 px-6 rounded bg-purple-dark font-bold font-accent text-2xl shadow-md shadow-purple-dark mb-5 md:text-4xl'
+                    className='w-fit mx-auto py-2 px-6 rounded bg-blue-light font-bold font-accent text-2xl shadow-md shadow-blue-dark mb-5 md:text-4xl'
                     type='submit'
                 >
                     Go

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import postLogin from '../api/post-login.js';
+import postLogin from '../api/post/post-login.js';
 import { useAuth } from '../hooks/use-auth.js';
 import login from '/note-icons/login.png';
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import postSignup from '../api/post-signup.js';
+import postSignup from '../api/post/post-signup.js';
 import signup from '/note-icons/signup.png';
 
 function SignupForm() {

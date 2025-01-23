@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/use-auth';
+import toast, { Toaster } from 'react-hot-toast';
 
 import home from '/note-icons/home.png';
 import workshops from '/note-icons/workshops.png';
@@ -15,23 +16,52 @@ import logo from '/logo/logo.png';
 
 const Nav = () => {
     const { auth, setAuth } = useAuth();
-    const handleLogout = () => {
-        window.localStorage.removeItem('token');
-        setAuth({ token: null });
-    };
     const [showNav, setShowNav] = useState(false);
-    const [loggedIn, setLoggedIn] = useState(false);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        setShowNav(false);
+        toast('Goodbye!');
+        setTimeout(() => {
+            window.localStorage.removeItem('token');
+            window.localStorage.removeItem('user_id');
+            window.localStorage.removeItem('first_name');
+            setAuth({ token: null, user: '', firstName: '' });
+            navigate('/');
+        }, 1000);
+    };
+
     const handleClick = () => setShowNav(!showNav);
 
+    const handleRedirect = () => {
+        toast('Please log in to Post-A-Note!');
+        setTimeout(() => {
+            setShowNav(false)
+            navigate('/login');
+        }, 1200);
+    };
+
     return (
-        <main className='min-h-screen flex flex-col bg-pink-50'>
+        <main className='min-h-screen flex flex-col bg-pink-light/10'>
+            <Toaster
+                position='top-center'
+                toastOptions={{
+                    className: 'text-lg md:text-2xl font-accent tracking-wider',
+                }}
+            />
             <nav>
                 {/* Desktop Menu */}
                 <section className='hidden md:flex fixed left-0 w-full'>
+                    {/* Logo / Home */}
                     <Link to='/'>
-                        <img className='w-60' src={logo} alt='' />
+                        <img
+                            className='w-60'
+                            src={logo}
+                            alt='Three sticky notes stacked on top of eachother with the word postitivity in the center of the top sticky note'
+                        />
                     </Link>
-                    <div className='flex bg-pink-50/90 h-20 items-center font-accent text-2xl w-full justify-evenly'>
+                    <div className='flex h-20 items-center font-accent text-xl lg:text-2xl w-full justify-evenly'>
+                        {/* Home */}
                         <NavLink
                             className={({ isActive }) =>
                                 isActive
@@ -42,6 +72,8 @@ const Nav = () => {
                         >
                             Home
                         </NavLink>
+
+                        {/* Post Note */}
                         {auth.token ? (
                             <NavLink
                                 className={({ isActive }) =>
@@ -54,13 +86,15 @@ const Nav = () => {
                                 Post-A-Note
                             </NavLink>
                         ) : (
-                            <NavLink
+                            <button
                                 className='border-[1px] p-1.5 border-transparent'
-                                to='/login'
+                                onClick={handleRedirect}
                             >
                                 Post-A-Note
-                            </NavLink>
+                            </button>
                         )}
+
+                        {/* Workshops */}
                         <NavLink
                             className={({ isActive }) =>
                                 isActive
@@ -73,6 +107,7 @@ const Nav = () => {
                         </NavLink>
                         {!auth.token ? (
                             <>
+                                {/* Log In */}
                                 <NavLink
                                     className={({ isActive }) =>
                                         isActive
@@ -83,6 +118,8 @@ const Nav = () => {
                                 >
                                     Log In
                                 </NavLink>
+
+                                {/* Sign Up */}
                                 <NavLink
                                     className={({ isActive }) =>
                                         isActive
@@ -96,6 +133,7 @@ const Nav = () => {
                             </>
                         ) : (
                             <>
+                                {/* Account */}
                                 <NavLink
                                     className={({ isActive }) =>
                                         isActive
@@ -106,6 +144,8 @@ const Nav = () => {
                                 >
                                     Account
                                 </NavLink>
+
+                                {/* Log Out */}
                                 <NavLink onClick={handleLogout} to='/'>
                                     Log Out
                                 </NavLink>
@@ -122,7 +162,11 @@ const Nav = () => {
                         to='/'
                         className='pl-3 md:hidden'
                     >
-                        <img className='w-52' src={logo} alt='' />
+                        <img
+                            className='w-52'
+                            src={logo}
+                            alt='Three sticky notes stacked on top of eachother with the word postitivity in the center of the top sticky note'
+                        />
                     </Link>
 
                     {/* Hamburger */}
@@ -150,7 +194,7 @@ const Nav = () => {
                         showNav ? 'min-h-screen' : 'hidden'
                     } md:hidden p-6`}
                 >
-                    <section className='grid grid-cols-2 w-4/5 mx-auto'>
+                    <section className='grid grid-cols-2 w-fit mx-auto gap-x-14'>
                         {/* Logo */}
                         <Link
                             onClick={handleClick}
@@ -179,17 +223,16 @@ const Nav = () => {
                         {!auth.token ? (
                             <>
                                 {/* Post Note */}
-                                <Link
-                                    onClick={handleClick}
+                                <button
+                                    onClick={handleRedirect}
                                     className='row-start-3 -skew-y-12 skew-x-12'
-                                    to='/login'
                                 >
                                     <img
                                         src={postnote}
                                         alt='Yellow cartoon-style illustration of a post-it note'
                                         className='w-28'
                                     />
-                                </Link>
+                                </button>
 
                                 {/* Log In */}
                                 <Link
@@ -219,6 +262,7 @@ const Nav = () => {
                             </>
                         ) : (
                             <>
+                                {/* Post Note */}
                                 <Link
                                     onClick={handleClick}
                                     className='row-start-3 -skew-y-12 skew-x-12'
@@ -230,7 +274,7 @@ const Nav = () => {
                                         className='w-28'
                                     />
                                 </Link>
-
+                                {/* Account */}
                                 <Link
                                     onClick={handleClick}
                                     className='row-start-4 col-start-2 -skew-x-12 skew-y-12'
@@ -243,8 +287,9 @@ const Nav = () => {
                                     />
                                 </Link>
 
+                                {/* Log Out */}
                                 <Link
-                                    onClick={handleClick}
+                                    onClick={handleLogout}
                                     className='row-start-5 -skew-y-12 skew-x-12'
                                     to='/'
                                 >
@@ -259,7 +304,11 @@ const Nav = () => {
                     </section>
                 </section>
             </nav>
-            <section className='min-h-screen mt-10 md:mt-36 lg:mt-20'>
+            <section
+                className={`${
+                    showNav ? 'hidden' : 'min-h-screen mt-10 md:mt-36 lg:mt-20'
+                }`}
+            >
                 <Outlet />
             </section>
         </main>

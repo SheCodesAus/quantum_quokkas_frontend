@@ -1,47 +1,77 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import postLogin from '../api/post-login.js';
+import { useAuth } from '../hooks/use-auth.js';
+import z from 'zod';
+import postLogin from '../api/post/post-login.js';
 import login from '/note-icons/login.png';
+import toast from 'react-hot-toast';
+
+const loginSchema = z.object({
+    username: z.string().min(5, 'Username required'),
+    password: z.string().min(1, 'Password required'),
+});
 
 function LoginForm() {
+    const { auth, setAuth } = useAuth();
     const navigate = useNavigate();
+
     const [credentials, setCredentials] = useState({
         username: '',
         password: '',
     });
 
-    const handleChange = (event) => {
-        const { id, value } = event.target;
+    const handleChange = (e) => {
+        const { id, value } = e.target;
         setCredentials((prevCredentials) => ({
             ...prevCredentials,
             [id]: value,
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        if (credentials.username && credentials.password) {
-            postLogin(credentials.username, credentials.password).then(
-                (response) => {
-                    window.localStorage.setItem('token', response.token);
-                    navigate('/');
-                }
-            );
+        const result = loginSchema.safeParse(credentials);
+
+        if (!result.success) {
+            const error = result.error.errors?.[0];
+            if (error) {
+                toast(error.message);
+            }
+            return;
+        } else {
+            try {
+                const response = await postLogin(
+                    result.data.username,
+                    result.data.password
+                );
+                window.localStorage.setItem('token', response.token);
+                window.localStorage.setItem('user_id', response.user_id);
+                window.localStorage.setItem('first_name', response.first_name);
+                setAuth({
+                    token: response.token,
+                    userId: response.user_id,
+                    firstName: response.first_name,
+                });
+                toast(`Welcome back ${response.first_name}!`);
+                navigate('/');
+            } catch (error) {
+                toast(error.message);
+            }
         }
     };
 
     return (
-        <main className='flex flex-col items-center'>
+        <main className='min-h-screen flex flex-col md:mt-8 lg:mt-24 xl:mt-16 items-center'>
             {/* Log In Heading */}
             <img
-                className='mb-5 w-28 md:w-40 lg:w-32 lg:mb-5'
+                className='mb-5 w-28 md:w-40 lg:mb-5'
                 src={login}
                 alt='Purple cartoon-style illustration of a post-it note'
             />
 
             {/* Log In Form */}
             <form
-                onSubmit={handleSubmit}
+                onSubmit={handleLogin}
                 className='h-fit w-72 flex flex-col font-main font-light text-lg md:w-96'
             >
                 {/* Username */}
@@ -53,7 +83,7 @@ function LoginForm() {
                     id='username'
                     onChange={handleChange}
                     autoCapitalize='none'
-                    className='p-1.5 bg-purple-light/40 focus-visible:outline-1 focus-visible:outline-purple-light rounded w-11/12 ml-4 mb-8 md:p-3'
+                    className='p-1.5 bg-blue-light/40 focus-visible:outline-1 focus-visible:outline-blue-light rounded w-11/12 ml-4 mb-6 md:p-3'
                 />
 
                 {/* Password */}
@@ -64,11 +94,11 @@ function LoginForm() {
                     type='password'
                     id='password'
                     onChange={handleChange}
-                    className='p-1.5 bg-purple-light/40 focus-visible:outline-1 focus-visible:outline-purple-light rounded w-11/12 ml-4 mb-8 md:p-3'
+                    className='p-1.5 bg-blue-light/40 focus-visible:outline-1 focus-visible:outline-blue-light rounded w-11/12 ml-4 mb-8 md:p-3'
                 />
 
                 <button
-                    className='w-fit mx-auto py-2 px-6 rounded bg-purple-dark font-bold font-accent text-2xl shadow-md shadow-purple-dark mb-5 md:text-4xl'
+                    className='w-fit mx-auto py-2 px-6 rounded bg-blue-light font-bold font-accent text-2xl shadow-md shadow-blue-dark mb-8 md:text-4xl'
                     type='submit'
                 >
                     Go
@@ -76,11 +106,11 @@ function LoginForm() {
             </form>
 
             {/* Notice */}
-            <p className='font-main font-light text-lg md:text-xl'>
+            <p className='font-main font-light text-xl italic md:text-2xl'>
                 Don't have an account yet?
-                <Link className='font-medium' to='/signup'>
+                <Link className='font-medium not-italic ml-2' to='/signup'>
                     {' '}
-                    Sign up
+                    Sign up!
                 </Link>
             </p>
         </main>

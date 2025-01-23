@@ -1,20 +1,26 @@
-import { workshops } from '../utils/workshops';
 import { notes } from '../utils/notes-data';
+import { useParams } from 'react-router-dom';
+import useWorkshop from '../hooks/use-workshop';
 
 const Workshop = () => {
+    const { id } = useParams();
+    const { workshop, isLoading, error } = useWorkshop(id);
+
     return (
-        <main className='md:mt-8 md:ml-48 lg:ml-52 xl:ml-60 font-main'>
+        <main className='min-h-screen md:mt-8 md:ml-48 lg:ml-52 xl:ml-60 font-main'>
             <h1 className='text-2xl md:text-3xl pl-5 mb-2'>
-                {workshops[0].title}
+                {workshop?.title}
             </h1>
             <h3 className='text-xl md:text-2xl pl-6 mb-8 md:mb-1'>
-                {workshops[0].organisation}
+                {workshop?.organisation}
             </h3>
             <p className='w-4/5 mx-auto font-light md:text-lg lg:w-3/5'>
-                {workshops[0].description}
+                {workshop?.description}
             </p>
             <div className='space-x-4 w-fit mx-auto flex flex-col'>
-                <label htmlFor='search-workshops' className='font-light'>Search Notes:</label>
+                <label htmlFor='search-workshops' className='font-light'>
+                    Search Notes:
+                </label>
                 <input
                     className='bg-pink-light/30 rounded p-2 w-72'
                     type='search'

@@ -42,16 +42,25 @@ const Nav = () => {
     };
 
     return (
-        <main className='min-h-screen flex flex-col bg-pink-50'>
-            <Toaster position='top-center' />
+        <main className='min-h-screen flex flex-col bg-pink-light/10'>
+            <Toaster
+                position='top-center'
+                toastOptions={{
+                    className: 'text-lg md:text-2xl font-accent tracking-wider',
+                }}
+            />
             <nav>
                 {/* Desktop Menu */}
                 <section className='hidden md:flex fixed left-0 w-full'>
                     {/* Logo / Home */}
                     <Link to='/'>
-                        <img className='w-60' src={logo} alt='' />
+                        <img
+                            className='w-60'
+                            src={logo}
+                            alt='Three sticky notes stacked on top of eachother with the word postitivity in the center of the top sticky note'
+                        />
                     </Link>
-                    <div className='flex bg-pink-50/90 h-20 items-center font-accent text-xl lg:text-2xl w-full justify-evenly'>
+                    <div className='flex h-20 items-center font-accent text-xl lg:text-2xl w-full justify-evenly'>
                         {/* Home */}
                         <NavLink
                             className={({ isActive }) =>
@@ -153,7 +162,11 @@ const Nav = () => {
                         to='/'
                         className='pl-3 md:hidden'
                     >
-                        <img className='w-52' src={logo} alt='' />
+                        <img
+                            className='w-52'
+                            src={logo}
+                            alt='Three sticky notes stacked on top of eachother with the word postitivity in the center of the top sticky note'
+                        />
                     </Link>
 
                     {/* Hamburger */}

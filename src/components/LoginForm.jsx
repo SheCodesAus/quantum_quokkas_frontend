@@ -12,8 +12,8 @@ function LoginForm() {
         password: '',
     });
 
-    const handleChange = (event) => {
-        const { id, value } = event.target;
+    const handleChange = (e) => {
+        const { id, value } = e.target;
         setCredentials((prevCredentials) => ({
             ...prevCredentials,
             [id]: value,
@@ -40,10 +40,10 @@ function LoginForm() {
     };
 
     return (
-        <main className='flex flex-col items-center'>
+        <main className='min-h-screen flex flex-col md:mt-8 lg:mt-24 xl:mt-16 items-center'>
             {/* Log In Heading */}
             <img
-                className='mb-5 w-28 md:w-40 lg:w-32 lg:mb-5'
+                className='mb-5 w-28 md:w-40 lg:mb-5'
                 src={login}
                 alt='Purple cartoon-style illustration of a post-it note'
             />
@@ -62,7 +62,7 @@ function LoginForm() {
                     id='username'
                     onChange={handleChange}
                     autoCapitalize='none'
-                    className='p-1.5 bg-blue-light/40 focus-visible:outline-1 focus-visible:outline-blue-light rounded w-11/12 ml-4 mb-8 md:p-3'
+                    className='p-1.5 bg-blue-light/40 focus-visible:outline-1 focus-visible:outline-blue-light rounded w-11/12 ml-4 mb-6 md:p-3'
                 />
 
                 {/* Password */}
@@ -77,7 +77,7 @@ function LoginForm() {
                 />
 
                 <button
-                    className='w-fit mx-auto py-2 px-6 rounded bg-blue-light font-bold font-accent text-2xl shadow-md shadow-blue-dark mb-5 md:text-4xl'
+                    className='w-fit mx-auto py-2 px-6 rounded bg-blue-light font-bold font-accent text-2xl shadow-md shadow-blue-dark mb-8 md:text-4xl'
                     type='submit'
                 >
                     Go
@@ -85,11 +85,11 @@ function LoginForm() {
             </form>
 
             {/* Notice */}
-            <p className='font-main font-light text-lg md:text-xl'>
+            <p className='font-main font-light text-xl italic md:text-2xl'>
                 Don't have an account yet?
-                <Link className='font-medium' to='/signup'>
+                <Link className='font-medium not-italic ml-2' to='/signup'>
                     {' '}
-                    Sign up
+                    Sign up!
                 </Link>
             </p>
         </main>

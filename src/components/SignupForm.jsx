@@ -45,10 +45,10 @@ function SignupForm() {
     };
 
     return (
-        <main className='flex flex-col items-center'>
+        <main className='min-h-screen flex flex-col items-center md:mt-6'>
             {/* Sign Up Heading */}
             <img
-                className='mb-5 w-28 md:w-40 lg:w-32 lg:mb-5'
+                className='mb-5 w-28 md:w-40 lg:mb-5'
                 src={signup}
                 alt='Green cartoon-style illustration of a post-it note'
             />

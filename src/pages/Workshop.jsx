@@ -7,7 +7,7 @@ const Workshop = () => {
     const { workshop, isLoading, error } = useWorkshop(id);
 
     return (
-        <main className='md:mt-8 md:ml-48 lg:ml-52 xl:ml-60 font-main'>
+        <main className='min-h-screen md:mt-8 md:ml-48 lg:ml-52 xl:ml-60 font-main'>
             <h1 className='text-2xl md:text-3xl pl-5 mb-2'>
                 {workshop?.title}
             </h1>

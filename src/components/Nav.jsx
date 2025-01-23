@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { Link, NavLink, Outlet, useNavigate, ScrollRestoration } from 'react-router-dom';
 import { useAuth } from '../hooks/use-auth';
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -42,7 +42,7 @@ const Nav = () => {
     };
 
     return (
-        <main className='min-h-screen flex flex-col bg-pink-light/10'>
+        <main className='min-h-screen flex flex-col bg-pink-100/50'>
             <Toaster
                 position='top-center'
                 toastOptions={{
@@ -60,13 +60,13 @@ const Nav = () => {
                             alt='Three sticky notes stacked on top of eachother with the word postitivity in the center of the top sticky note'
                         />
                     </Link>
-                    <div className='flex h-20 items-center font-accent text-xl lg:text-2xl w-full justify-evenly'>
+                    <div className='flex h-20 items-center font-accent text-xl lg:text-2xl w-full justify-evenly bg-pink-50/80'>
                         {/* Home */}
                         <NavLink
                             className={({ isActive }) =>
                                 isActive
-                                    ? 'border-[1px] py-1.5 px-2 rounded border-purple-dark'
-                                    : 'border-[1px] py-1.5 px-2 border-transparent'
+                                    ? 'border-[1px] py-2 px-5 rounded border-purple-dark bg-pink-50/90'
+                                    : 'border-[1px] py-2 px-5 rounded border-transparent bg-pink-50/90'
                             }
                             to='/'
                         >
@@ -78,8 +78,8 @@ const Nav = () => {
                             <NavLink
                                 className={({ isActive }) =>
                                     isActive
-                                        ? 'border-[1px] p-1.5 rounded border-yellow-dark'
-                                        : 'border-[1px] p-1.5 border-transparent'
+                                        ? 'border-[1px] py-2 px-5 rounded border-yellow-dark bg-pink-50/90'
+                                        : 'border-[1px] py-2 px-5 rounded border-transparent bg-pink-50/90'
                                 }
                                 to='/newnote'
                             >
@@ -87,7 +87,7 @@ const Nav = () => {
                             </NavLink>
                         ) : (
                             <button
-                                className='border-[1px] p-1.5 border-transparent'
+                                className='border-[1px] py-2 px-5 rounded border-transparent bg-pink-50/90'
                                 onClick={handleRedirect}
                             >
                                 Post-A-Note
@@ -98,47 +98,33 @@ const Nav = () => {
                         <NavLink
                             className={({ isActive }) =>
                                 isActive
-                                    ? 'border-[1px] p-1.5 rounded border-orange-dark/60'
-                                    : 'border-[1px] p-1.5 border-transparent'
+                                    ? 'border-[1px] py-2 px-5 rounded border-orange-dark/60 bg-pink-50/90'
+                                    : 'border-[1px] py-2 px-5 rounded border-transparent bg-pink-50/80'
                             }
                             to='/workshops'
                         >
                             Workshops
                         </NavLink>
                         {!auth.token ? (
-                            <>
-                                {/* Log In */}
-                                <NavLink
-                                    className={({ isActive }) =>
-                                        isActive
-                                            ? 'border-[1px] p-1.5 rounded border-blue-dark/80'
-                                            : 'border-[1px] p-1.5 border-transparent'
-                                    }
-                                    to='/login'
-                                >
-                                    Log In
-                                </NavLink>
-
-                                {/* Sign Up */}
-                                <NavLink
-                                    className={({ isActive }) =>
-                                        isActive
-                                            ? 'border-[1px] p-1.5 rounded border-pink-dark'
-                                            : 'border-[1px] p-1.5 border-transparent'
-                                    }
-                                    to='/signup'
-                                >
-                                    Sign Up
-                                </NavLink>
-                            </>
+                            // Log In
+                            <NavLink
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? 'border-[1px] py-2 px-5 rounded border-blue-dark/80 bg-pink-50/90'
+                                        : 'border-[1px] py-2 px-5 rounded border-transparent bg-pink-50/80'
+                                }
+                                to='/login'
+                            >
+                                Log In
+                            </NavLink>
                         ) : (
                             <>
                                 {/* Account */}
                                 <NavLink
                                     className={({ isActive }) =>
                                         isActive
-                                            ? 'border-[1px] p-1.5 rounded border-green-dark'
-                                            : 'border-[1px] p-1.5 border-transparent'
+                                            ? 'border-[1px] py-2 px-5 rounded border-green-dark bg-pink-50/90'
+                                            : 'border-[1px] py-2 px-5 rounded border-transparent bg-pink-50/80'
                                     }
                                     to='/account'
                                 >
@@ -304,12 +290,13 @@ const Nav = () => {
                     </section>
                 </section>
             </nav>
+            <ScrollRestoration />
             <section
                 className={`${
                     showNav ? 'hidden' : 'min-h-screen mt-10 md:mt-36 lg:mt-20'
                 }`}
             >
-                <Outlet />
+                <Outlet context={handleRedirect} />
             </section>
         </main>
     );

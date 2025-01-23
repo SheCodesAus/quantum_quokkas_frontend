@@ -9,7 +9,7 @@ const Account = () => {
     return (
         <main className='min-h-screen md:border-l-[1px] border-green-dark md:mt-8 md:ml-48 lg:ml-52 xl:ml-60'>
             <h1 className='font-main text-3xl text-center'>
-                Welcome, {auth.userId}
+                Welcome, {auth.firstName}
             </h1>
             <section className='flex w-full justify-between px-3 py-4 text-lg font-light border-b-[1px] border-green-dark md:p-6 md:border-transparent md:text-xl lg:text-2xl lg:justify-around'>
                 <NavLink

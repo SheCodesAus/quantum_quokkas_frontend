@@ -1,4 +1,3 @@
-import { notes } from '../utils/notes-data';
 import { useParams } from 'react-router-dom';
 import useWorkshop from '../hooks/use-workshop';
 
@@ -27,7 +26,7 @@ const Workshop = () => {
                 />
             </div>
             <section className='grid grid-cols-1 w-fit mx-auto my-4 gap-2 md:grid-cols-2 md:gap-6 lg:grid-cols-3'>
-                {notes.map((note) => {
+                {workshop?.notes.map((note, i) => {
                     return (
                         <article
                             key={note.id}

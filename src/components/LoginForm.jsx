@@ -1,12 +1,20 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import postLogin from '../api/post/post-login.js';
 import { useAuth } from '../hooks/use-auth.js';
+import z from 'zod';
+import postLogin from '../api/post/post-login.js';
 import login from '/note-icons/login.png';
+import toast from 'react-hot-toast';
+
+const loginSchema = z.object({
+    username: z.string().min(5, 'Username required'),
+    password: z.string().min(1, 'Password required'),
+});
 
 function LoginForm() {
-    const navigate = useNavigate();
     const { auth, setAuth } = useAuth();
+    const navigate = useNavigate();
+
     const [credentials, setCredentials] = useState({
         username: '',
         password: '',
@@ -20,22 +28,35 @@ function LoginForm() {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        if (credentials.username && credentials.password) {
-            postLogin(credentials.username, credentials.password).then(
-                (response) => {
-                    window.localStorage.setItem('token', response.token);
-                    window.localStorage.setItem('user_id', response.user_id);
-                    window.localStorage.setItem('first_name', response.first_name);
-                    setAuth({
-                        token: response.token,
-                        userId: response.user_id,
-                        firstName: response.first_name
-                    })
-                    navigate('/');
-                }
-            );
+        const result = loginSchema.safeParse(credentials);
+
+        if (!result.success) {
+            const error = result.error.errors?.[0];
+            if (error) {
+                toast(error.message);
+            }
+            return;
+        } else {
+            try {
+                const response = await postLogin(
+                    result.data.username,
+                    result.data.password
+                );
+                window.localStorage.setItem('token', response.token);
+                window.localStorage.setItem('user_id', response.user_id);
+                window.localStorage.setItem('first_name', response.first_name);
+                setAuth({
+                    token: response.token,
+                    userId: response.user_id,
+                    firstName: response.first_name,
+                });
+                toast(`Welcome back ${response.first_name}!`);
+                navigate('/');
+            } catch (error) {
+                toast(error.message);
+            }
         }
     };
 
@@ -50,7 +71,7 @@ function LoginForm() {
 
             {/* Log In Form */}
             <form
-                onSubmit={handleSubmit}
+                onSubmit={handleLogin}
                 className='h-fit w-72 flex flex-col font-main font-light text-lg md:w-96'
             >
                 {/* Username */}

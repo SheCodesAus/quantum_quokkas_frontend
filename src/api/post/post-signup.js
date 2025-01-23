@@ -1,19 +1,21 @@
-async function postSignup(username, email, password) {
-    const url = `${import.meta.env.VITE_API_URL}/login/`;  
+async function postSignup(firstName, lastName, username, email, password) {
+    const url = `${import.meta.env.VITE_API_URL}/signup/`;
     const response = await fetch(url, {
-        method: "POST",
+        method: 'POST',
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            "username": username,
-            "email": email,
-            "password": password,
+            first_name: firstName,
+            last_name: lastName,
+            username: username,
+            email: email,
+            password: password,
         }),
     });
 
     if (!response.ok) {
-        const fallbackError = `Error trying to sign up`;
+        const fallbackError = `Error trying to create account`;
 
         const data = await response.json().catch(() => {
             throw new Error(fallbackError);

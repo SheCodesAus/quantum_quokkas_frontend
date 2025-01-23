@@ -1,5 +1,11 @@
 import { useState } from 'react';
-import { Link, NavLink, Outlet, useNavigate, ScrollRestoration } from 'react-router-dom';
+import {
+    Link,
+    NavLink,
+    Outlet,
+    useNavigate,
+    ScrollRestoration,
+} from 'react-router-dom';
 import { useAuth } from '../hooks/use-auth';
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -28,7 +34,7 @@ const Nav = () => {
             window.localStorage.removeItem('first_name');
             setAuth({ token: null, user: '', firstName: '' });
             navigate('/');
-        }, 1000);
+        }, 700);
     };
 
     const handleClick = () => setShowNav(!showNav);
@@ -36,7 +42,7 @@ const Nav = () => {
     const handleRedirect = () => {
         toast('Please log in to Post-A-Note!');
         setTimeout(() => {
-            setShowNav(false)
+            setShowNav(false);
             navigate('/login');
         }, 1200);
     };

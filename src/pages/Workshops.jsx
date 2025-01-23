@@ -8,7 +8,7 @@ const Workshops = () => {
         } else return str;
     };
     return (
-        <main className='font-main md:mt-8 md:ml-48 lg:ml-52 xl:ml-56'>
+        <main className='min-h-screen font-main md:mt-8 md:ml-48 lg:ml-52 xl:ml-56'>
             {/*  className='md:mt-8 md:ml-48 lg:ml-52 xl:ml-60' */}
             <h1 className='text-2xl'>All Workshops</h1>
             <div className='space-x-4 w-fit mx-auto'>

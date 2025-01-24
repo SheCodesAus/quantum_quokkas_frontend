@@ -18,6 +18,7 @@ import NewWorkshop from './pages/NewWorkshop';
 import UsersNotes from './components/UsersNotes';
 import UsersWorkshops from './components/UsersWorkshops';
 import EditProfile from './components/EditProfile';
+import Loader from './components/Loader';
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
         element: <Nav />,
         children: [
             { path: '/', element: <Home /> },
+            { path: '/loader', element: <Loader /> },
             {
                 path: '/account',
                 element: <Account />,

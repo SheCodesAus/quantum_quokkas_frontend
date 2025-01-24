@@ -1,5 +1,5 @@
 async function postSignup(firstName, lastName, username, email, password) {
-    const url = `${import.meta.env.VITE_API_URL}/signup/`;
+    const url = `${import.meta.env.VITE_API_URL}/users/`;
     const response = await fetch(url, {
         method: 'POST',
         headers: {

@@ -1,5 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import useWorkshops from '../hooks/use-workshops';
+import Loader from '../components/Loader';
+import Error from '../components/Error';
 
 const Workshops = () => {
     const {workshops, isLoading, error} = useWorkshops()
@@ -9,6 +11,14 @@ const Workshops = () => {
             return str.slice(0, num) + `...`;
         } else return str;
     };
+
+    if (isLoading) {
+        return <Loader />
+    }
+
+    if (error) {
+        return <Error errorMessage={error.message} />;
+    }
 
     return (
         <main className='min-h-screen font-main space-y-8 md:mt-8 md:ml-48 lg:ml-52 xl:ml-56'>

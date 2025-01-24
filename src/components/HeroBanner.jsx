@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import useNotes from '../hooks/use-notes';
+import Loader from './Loader';
+import Error from './Error';
 
 const HeroBanner = () => {
-    const { notes } = useNotes();
+    const { notes, isLoading, error } = useNotes();
     const [index, setIndex] = useState(0);
     const intervalRef = useRef(null);
 
@@ -17,6 +19,14 @@ const HeroBanner = () => {
             clearInterval(intervalRef.current);
         };
     }, [notes]);
+
+    if (isLoading) {
+        return <Loader />
+    }
+
+    if (error) {
+        return <Error errorMessage={error.message} />
+    }
 
     return (
         <article className='bg-hero bg-cover size-80 flex flex-col justify-center items-center mx-auto md:mx-10 lg:mx-0 xl:mx-auto md:size-96'>

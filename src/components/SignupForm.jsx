@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/use-auth.js';
+
 import z from 'zod';
+
 import postSignup from '../api/post/post-signup.js';
 import signup from '/note-icons/signup.png';
 import toast from 'react-hot-toast';
 import postLogin from '../api/post/post-login.js';
-import { useAuth } from '../hooks/use-auth.js';
 
 const signupSchema = z.object({
     firstName: z.string().min(1, 'Enter your first name'),
@@ -16,8 +18,11 @@ const signupSchema = z.object({
 });
 
 function SignupForm() {
-    const { auth, setAuth } = useAuth();
+    const { setAuth } = useAuth();
+
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from || '/';
 
     const [credentials, setCredentials] = useState({
         firstName: '',
@@ -68,7 +73,7 @@ function SignupForm() {
                 firstName: loginResponse.first_name,
             });
             toast(`Welcome ${loginResponse.first_name}!`);
-            navigate('/');
+            navigate(from);
         } catch (error) {
             toast(error.message);
         }

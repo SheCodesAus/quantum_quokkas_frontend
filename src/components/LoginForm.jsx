@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/use-auth.js';
+
 import z from 'zod';
+
 import postLogin from '../api/post/post-login.js';
 import login from '/note-icons/login.png';
 import toast from 'react-hot-toast';
@@ -12,8 +14,12 @@ const loginSchema = z.object({
 });
 
 function LoginForm() {
-    const { auth, setAuth } = useAuth();
+    const { setAuth } = useAuth();
+
     const navigate = useNavigate();
+    const location = useLocation();
+    // if user is on log in page because they clicked post note
+    const from = location.state?.from || '/';
 
     const [credentials, setCredentials] = useState({
         username: '',
@@ -53,7 +59,7 @@ function LoginForm() {
                     firstName: response.first_name,
                 });
                 toast(`Welcome back ${response.first_name}!`);
-                navigate('/');
+                navigate(from);
             } catch (error) {
                 toast(error.message);
             }
@@ -108,7 +114,7 @@ function LoginForm() {
             {/* Notice */}
             <p className='font-main font-light text-xl italic md:text-2xl'>
                 Don't have an account yet?
-                <Link className='font-medium not-italic ml-2' to='/signup'>
+                <Link className='font-medium not-italic ml-2' to='/signup' state={{from}}>
                     {' '}
                     Sign up!
                 </Link>

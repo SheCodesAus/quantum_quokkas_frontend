@@ -4,7 +4,8 @@ async function getWorkshop(workshopId) {
     const response = await fetch(url, { method: 'GET' });
 
     if (!response.ok) {
-        const fallbackError = 'Error fetching workshop';
+        const fallbackError =
+            'Oops! Looks like we are having issues with this workshop';
 
         const data = await response.json().catch(() => {
             throw new Error(fallbackError);

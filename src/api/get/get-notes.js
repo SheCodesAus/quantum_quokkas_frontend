@@ -4,7 +4,8 @@ async function getNotes() {
     const response = await fetch(url, { method: 'GET' });
 
     if (!response.ok) {
-        const fallbackError = 'Error fetching notes';
+        const fallbackError =
+            'Oops! Looks like we are having issues with notes right now';
 
         const data = await response.json().catch(() => {
             throw new Error(fallbackError);

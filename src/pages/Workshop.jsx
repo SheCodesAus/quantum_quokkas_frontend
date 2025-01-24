@@ -1,9 +1,19 @@
 import { useParams } from 'react-router-dom';
 import useWorkshop from '../hooks/use-workshop';
+import Loader from '../components/Loader';
+import Error from '../components/Error';
 
 const Workshop = () => {
     const { id } = useParams();
     const { workshop, isLoading, error } = useWorkshop(id);
+
+    if (isLoading) {
+        return <Loader />
+    }
+
+    if (error) {
+        return <Error errorMessage={error.message} />
+    }
 
     return (
         <main className='min-h-screen md:mt-8 md:ml-48 lg:ml-52 xl:ml-60 font-main'>

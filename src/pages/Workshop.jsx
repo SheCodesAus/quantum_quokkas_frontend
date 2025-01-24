@@ -1,10 +1,19 @@
-import { notes } from '../utils/notes-data';
 import { useParams } from 'react-router-dom';
 import useWorkshop from '../hooks/use-workshop';
+import Loader from '../components/Loader';
+import Error from '../components/Error';
 
 const Workshop = () => {
     const { id } = useParams();
     const { workshop, isLoading, error } = useWorkshop(id);
+
+    if (isLoading) {
+        return <Loader />
+    }
+
+    if (error) {
+        return <Error errorMessage={error.message} />
+    }
 
     return (
         <main className='min-h-screen md:mt-8 md:ml-48 lg:ml-52 xl:ml-60 font-main'>
@@ -27,7 +36,7 @@ const Workshop = () => {
                 />
             </div>
             <section className='grid grid-cols-1 w-fit mx-auto my-4 gap-2 md:grid-cols-2 md:gap-6 lg:grid-cols-3'>
-                {notes.map((note) => {
+                {workshop?.notes.map((note, i) => {
                     return (
                         <article
                             key={note.id}

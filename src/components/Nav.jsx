@@ -43,7 +43,7 @@ const Nav = () => {
         toast('Please log in to Post-A-Note!');
         setTimeout(() => {
             setShowNav(false);
-            navigate('/login');
+            navigate('/login', { state: { from: '/newnote' } });
         }, 1200);
     };
 

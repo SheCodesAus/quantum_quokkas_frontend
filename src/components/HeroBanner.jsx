@@ -21,27 +21,29 @@ const HeroBanner = () => {
     }, [notes]);
 
     if (isLoading) {
-        return <Loader />
+        return <Loader />;
     }
 
     if (error) {
-        return <Error errorMessage={error.message} />
+        return <Error errorMessage={error.message} />;
     }
 
     return (
-        <article className='bg-hero bg-cover size-80 flex flex-col justify-center items-center mx-auto md:mx-10 lg:mx-0 xl:mx-auto md:size-96'>
+        <article className='bg-hero bg-cover size-80 flex flex-col justify-center mx-auto md:mx-10 lg:mx-0 xl:mx-auto md:size-96'>
+            {/* Text Container */}
             <div className='p-6 mt-14 md:mt-20 md:ml-4 h-full flex flex-col justify-between font-note'>
                 
                 {/* Note Content */}
                 <p className='max-w-[90%] text-xl md:text-2xl'>
                     {notes[index]?.content}
                 </p>
-                
-                {/* Name of Note Poster */}
-                <p className='text-2xl md:text-3xl'>- {notes[index]?.user.first_name}</p>
+                {
+                /* Name of Note Poster */}
+                <p className='text-2xl md:text-3xl'>
+                    - {notes[index]?.user.first_name}
+                </p>
             </div>
         </article>
     );
 };
 export default HeroBanner;
-

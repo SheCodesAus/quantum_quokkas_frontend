@@ -2,19 +2,20 @@ import HeroBanner from './HeroBanner';
 import HeroPostNoteBtn from './HeroPostNoteBtn';
 
 const About = () => {
-
     return (
         <main className='space-y-8 lg:w-[850px] xl:w-[1000px] lg:grid grid-cols-2'>
             {/* Headline */}
             <h1 className='font-main font-light text-2xl w-11/12 mx-auto md:text-3xl lg:w-3/5 lg:ml-10 col-span-2'>
                 Welcome to post
-                <span className='font-accent text-4xl lg:text-5xl ml-1 mr-1'>it</span>
+                <span className='font-accent text-4xl lg:text-5xl ml-1 mr-1'>
+                    it
+                </span>
                 ivity, where <span className='font-bold'>every</span> success is
                 celebrated, no matter how small.
             </h1>
 
             {/* Note Slideshow */}
-            <div className='lg:col-start-2'>
+            <div className='min-h-[325px] md:min-h-96 lg:col-start-2'>
                 <HeroBanner />
             </div>
 

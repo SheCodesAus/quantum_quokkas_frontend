@@ -18,7 +18,7 @@ async function postNewNote(noteData) {
   });
 
   if (!response.ok) {
-    const fallbackError = `Error trying to create new note`;
+    const fallbackError = `Oops! Sorry, it looks like we can't post your note right now. Please try again later`;
 
     const data = await response.json().catch(() => {
       throw new Error(fallbackError);

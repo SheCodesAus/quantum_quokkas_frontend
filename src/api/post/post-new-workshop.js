@@ -25,7 +25,7 @@ async function postNewWorkshop(workshopData) {
   });
 
   if (!response.ok) {
-    const fallbackError = `Error trying to create new workshop`;
+    const fallbackError = `Oops! Sorry, it looks like we can't add your workshop right now. Please try again later`;
 
     const data = await response.json().catch(() => {
       throw new Error(fallbackError);

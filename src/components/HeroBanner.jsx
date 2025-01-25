@@ -10,8 +10,8 @@ const HeroBanner = () => {
 
     useEffect(() => {
         const increaseIndex = () => {
-            setIndex((prev) => (prev + 1) % notes.length);
-            //setIndex((prev) => (prev + 1) % 5);
+            //setIndex((prev) => (prev + 1) % notes.length);
+            setIndex((prev) => (prev + 1) % 5);
         };
         intervalRef.current = setInterval(increaseIndex, 3500);
 

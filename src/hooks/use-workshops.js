@@ -18,5 +18,5 @@ export default function useWorkshops() {
         })
     }, [])
 
-    return {workshops, isLoading, error}
+    return {workshops, setWorkshops, isLoading, error}
 }

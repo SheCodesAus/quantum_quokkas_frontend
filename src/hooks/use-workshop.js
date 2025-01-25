@@ -18,5 +18,5 @@ export default function useWorkshop(workshopId) {
             });
     }, [workshopId]);
 
-    return { workshop, isLoading, error };
+    return { workshop, setWorkshop, isLoading, error };
 }

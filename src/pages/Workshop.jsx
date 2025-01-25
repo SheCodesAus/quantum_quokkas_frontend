@@ -2,17 +2,33 @@ import { useParams } from 'react-router-dom';
 import useWorkshop from '../hooks/use-workshop';
 import Loader from '../components/Loader';
 import Error from '../components/Error';
+import SearchBar from '../components/SearchBar';
+import pink from '/custom-btns/pink-search.svg';
 
 const Workshop = () => {
     const { id } = useParams();
-    const { workshop, isLoading, error } = useWorkshop(id);
+    const { workshop, setWorkshop, isLoading, error } = useWorkshop(id);
+
+    // callback function to filter notes
+    const filterWorkshopNotes = (filteredList) => {
+        setWorkshop({
+            ...workshop,
+            notes: filteredList,
+        });
+    };
+
+    const filterByKeyword = (listToFilter, wordToSearch) => {
+        return listToFilter.filter((item) =>
+            item.content.toLowerCase().includes(wordToSearch.toLowerCase())
+        );
+    };
 
     if (isLoading) {
-        return <Loader />
+        return <Loader />;
     }
 
     if (error) {
-        return <Error errorMessage={error.message} />
+        return <Error errorMessage={error.message} />;
     }
 
     return (
@@ -33,19 +49,18 @@ const Workshop = () => {
             </p>
 
             {/* Searchbar */}
-            <div className='space-x-4 w-fit mx-auto flex flex-col'>
-                <label htmlFor='search-workshops' className='font-light'>
-                    Search Notes:
-                </label>
-                <input
-                    className='bg-pink-light/30 rounded p-2 w-72 focus-visible:outline-1 focus-visible:outline-pink-dark/70'
-                    type='search'
-                />
-            </div>
+            <SearchBar
+                list={workshop?.notes}
+                filterFunc={filterWorkshopNotes}
+                filterByKeyword={filterByKeyword}
+                color='pink'
+                image={pink}
+                placeholder={`Search notes`}
+            />
 
             {/* List of Workshop's Notes */}
             <section className='grid grid-cols-1 w-fit mx-auto my-4 gap-2 md:grid-cols-2 md:gap-6 lg:grid-cols-3'>
-                {workshop?.notes.map((note, i) => {
+                {workshop?.notes.map((note) => {
                     return (
                         <article
                             key={note.id}

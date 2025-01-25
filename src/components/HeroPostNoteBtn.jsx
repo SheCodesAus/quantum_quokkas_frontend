@@ -1,9 +1,14 @@
-import { NavLink, useOutletContext } from 'react-router-dom';
+import { NavLink, useNavigate, useOutletContext } from 'react-router-dom';
 import { useAuth } from '../hooks/use-auth';
 
 const HeroPostNoteBtn = () => {
     const { auth } = useAuth();
+    const navigate = useNavigate();
+
     const handleRedirect = useOutletContext()
+    // const redirectToLogin = () => {
+    //     navigate('/login', { state: { from: '/newnote' } });
+    // };
 
     return (
         <section className='flex flex-col items-center space-y-6 md:mx-0 md:border-t-[1px] border-purple-dark/80 pt-6 lg:w-11/12'>

@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import useNotes from '../hooks/use-notes';
+import useRecentNotes from '../hooks/use-recent-notes';
 import Loader from './Loader';
 import Error from './Error';
 
 const HeroBanner = () => {
-    const { notes, isLoading, error } = useNotes();
+    const { notes, isLoading, error } = useRecentNotes();
     const [index, setIndex] = useState(0);
     const intervalRef = useRef(null);
 

@@ -1,7 +1,7 @@
 // api/put/put-note.js
 export default async function updateNote(noteId, noteData) {
     const response = await fetch(
-      `${import.meta.env.VITE_API_URL}notes/${noteId}/`,
+      `${import.meta.env.VITE_API_URL}/notes/${noteId}/`,
       {
         method: "PUT",
         headers: {

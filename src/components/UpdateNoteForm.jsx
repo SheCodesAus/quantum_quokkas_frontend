@@ -87,7 +87,7 @@ function UpdateNoteForm() {
     
         const submitData = {
             ...noteData,
-            archive_user: noteData.is_archived ? auth.user.id : null
+            archive_user: noteData.is_archived ? auth.user?.id : null
         };
     
         try {

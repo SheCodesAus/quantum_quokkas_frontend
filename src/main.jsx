@@ -14,6 +14,8 @@ import Signup from './pages/Signup';
 import Workshops from './pages/Workshops';
 import Workshop from './pages/Workshop';
 import NewNote from './pages/NewNote';
+import Note from './pages/Note';
+import UpdateNote from './pages/UpdateNote';
 import NewWorkshop from './pages/NewWorkshop';
 import UsersNotes from './components/UsersNotes';
 import UsersWorkshops from './components/UsersWorkshops';
@@ -40,6 +42,8 @@ const router = createBrowserRouter([
             { path: '/signup', element: <Signup /> },
             { path: '/newworkshop', element: <NewWorkshop /> },
             { path: '/newnote', element: <NewNote /> },
+            { path: '/note/:noteId', element: <Note /> },
+            { path: '/note/:noteId/updatenote', element: <UpdateNote /> },
             { path: '/workshop/:id', element: <Workshop /> },
             { path: '/workshops', element: <Workshops /> },
         ],

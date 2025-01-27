@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import getActiveWorkshops from "../api/get/get-active-workshops";
 
-export default function useWorkshops() {
+export default function useActiveWorkshops() {
     const [workshops, setWorkshops] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState()

@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import useWorkshops from '../hooks/use-workshops';
+import useActiveWorkshops from '../hooks/use-active-workshops';
 
 const RecentWorkshops = () => {
-    const { workshops } = useWorkshops();
+    const { workshops } = useActiveWorkshops();
 
     // function to shorten description preview
     const truncateString = (str, num) => {
@@ -27,11 +28,8 @@ const RecentWorkshops = () => {
                             <h3 className='text-2xl font-accent tracking-wider pl-2'>
                                 {workshop?.title}
                             </h3>
-                            <h4 className='pl-4 text-xl'>
-                                {workshop?.organisation}
-                            </h4>
                             <p className='font-light text-lg px-4'>
-                                {truncateString(workshop?.description, 240)}
+                                {truncateString(workshop?.description, 180)}
                             </p>
 
                             {/* Link to specific workshop */}

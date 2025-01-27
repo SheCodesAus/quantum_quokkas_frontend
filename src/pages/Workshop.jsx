@@ -38,11 +38,6 @@ const Workshop = () => {
                 {workshop?.title}
             </h1>
 
-            {/* Organisation */}
-            <h3 className='text-xl md:text-2xl pl-6 mb-8 md:mb-1'>
-                {workshop?.organisation}
-            </h3>
-
             {/* Description */}
             <p className='w-4/5 mx-auto font-light md:text-lg lg:w-3/5'>
                 {workshop?.description}

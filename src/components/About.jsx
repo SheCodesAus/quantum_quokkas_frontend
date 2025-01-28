@@ -1,5 +1,5 @@
 import HeroBanner from './HeroBanner';
-import HeroPostNoteBtn from './HeroPostNoteBtn';
+import PostNoteBtn from './PostNoteBtn';
 
 const About = () => {
     return (
@@ -33,7 +33,14 @@ const About = () => {
                 </p>
 
                 {/* Post A Note Button */}
-                <HeroPostNoteBtn />
+                <section className='flex flex-col items-center space-y-6 md:mx-0 md:border-t-[1px] border-purple-dark/80 pt-6 lg:w-11/12'>
+                    <h3 className='font-main text-xl font-light italic'>
+                        Got a note to add to a workshop?
+                    </h3>
+                    <div className='w-44 h-16 flex place-item-center'>
+                        <PostNoteBtn color='yellow' />
+                    </div>
+                </section>
             </section>
         </main>
     );

@@ -1,22 +1,22 @@
-import getWorkshop from '../api/get/get-workshop';
+import getNote from '../api/get/get-note';
 import { useState, useEffect } from 'react';
 
-export default function useWorkshop(workshopId) {
-    const [workshop, setWorkshop] = useState();
+export default function useNote(noteId) {
+    const [note, setNote] = useState();
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState();
 
     useEffect(() => {
-        getWorkshop(workshopId)
-            .then((workshop) => {
-                setWorkshop(workshop);
+        getNote(noteId)
+            .then((note) => {
+                setNote(note);
                 setIsLoading(false);
             })
             .catch((error) => {
                 setError(error);
                 setIsLoading(false);
             });
-    }, [workshopId]);
+    }, [noteId]);
 
-    return { workshop, setWorkshop, isLoading, error };
+    return { note, setNote, isLoading, error };
 }

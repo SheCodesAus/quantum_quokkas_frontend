@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import useWorkshops from '../hooks/use-workshops';
 import useActiveWorkshops from '../hooks/use-active-workshops';
+import PostNoteBtn from './PostNoteBtn';
 
 const RecentWorkshops = () => {
     const { workshops } = useActiveWorkshops();

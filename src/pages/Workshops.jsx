@@ -35,35 +35,34 @@ const Workshops = () => {
     }
 
     return (
-        <main className='min-h-screen font-main space-y-8 md:mt-8 md:ml-48 lg:ml-52 xl:ml-56'>
+        <main className='min-h-screen font-main space-y-8 md:mt-8 md:ml-48'>
             {/* Workshops Heading */}
-            <h1 className='text-2xl text-center md:text-start lg:text-3xl lg:ml-12'>
+            <h1 className='text-3xl text-center font-light md:text-start lg:ml-12'>
                 All Workshops
             </h1>
 
             {/* Searchbar */}
-            <SearchBar
-                list={workshops}
-                filterFunc={filterWorkshops}
-                filterByKeyword={filterByKeyword}
-                color='orange'
-                image={orange}
-            />
+            <div className='w-fit mx-auto lg:mx-0 lg:ml-16'>
+                <SearchBar
+                    list={workshops}
+                    filterFunc={filterWorkshops}
+                    filterByKeyword={filterByKeyword}
+                    color='orange'
+                    image={orange}
+                />
+            </div>
 
             {/* List of Workshops */}
-            <section className='font-main p-2 w-full gap-8 space-y-4 lg:w-fit lg:mx-auto'>
+            <section className='font-main p-2 w-full gap-8 space-y-4 lg:w-fit lg:mx-auto xl:grid grid-cols-2 xl:space-y-0'>
                 {workshops.map((workshop) => {
                     return (
                         <article
                             key={workshop.id}
-                            className='px-6 py-8 space-y-4 bg-orange-light/50 rounded shadow-orange-dark shadow-md md:w-[4/5] lg:w-[650px]'
+                            className='px-6 py-8 space-y-4 bg-orange-light/50 rounded shadow-orange-dark shadow-md md:w-[4/5] lg:w-[650px] xl:w-[520px] xl:flex xl:flex-col xl:justify-between'
                         >
                             <h3 className='text-2xl font-accent tracking-wider pl-2'>
                                 {workshop.title}
                             </h3>
-                            <h4 className='pl-4 text-xl'>
-                                {workshop.organisation}
-                            </h4>
                             <p className='font-light text-lg px-4'>
                                 {truncateString(workshop.description, 240)}
                             </p>

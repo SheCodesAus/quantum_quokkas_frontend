@@ -7,7 +7,7 @@ const Account = () => {
     const { auth } = useAuth();
 
     return (
-        <main className='min-h-screen md:border-l-[1px] border-green-dark md:mt-8 md:ml-48 lg:ml-52 xl:ml-60'>
+        <main className='min-h-screen md:border-l-[1px] font-main border-green-dark md:mt-8 md:ml-48 lg:ml-52 xl:ml-60'>
             <h1 className='font-main text-3xl text-center'>
                 Welcome, {auth.firstName}
             </h1>

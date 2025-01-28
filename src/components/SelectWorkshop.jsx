@@ -1,23 +1,33 @@
 import { useState, useEffect } from 'react';
+import {
+    HiOutlineChevronDoubleDown,
+    HiOutlineChevronDoubleUp,
+} from 'react-icons/hi';
 
-const SelectWorkshop = ({ workshops, noteData, setNoteData }) => {
-    const [selectMenuTitle, setSelectMenuTitle] = useState('Select workshop');
+const SelectWorkshop = ({
+    workshops,
+    noteData,
+    setNoteData,
+    workshopTitle,
+}) => {
+    const title = workshopTitle ? workshopTitle : 'Select workshop';
+
     const [choosingWorkshop, setChoosingWorkshop] = useState(false);
+    const [selectMenuTitle, setSelectMenuTitle] = useState(title);
 
     const toggleDropdown = () => {
         setChoosingWorkshop(!choosingWorkshop);
     };
 
-    // Add useEffect to set initial workshop title
-    useEffect(() => {
-        if (noteData.workshop && workshops) {
-            const currentWorkshop = workshops.find(w => w.id === Number(noteData.workshop));
-            if (currentWorkshop) {
-                setSelectMenuTitle(currentWorkshop.title);
-            }
-        }
-    }, [noteData.workshop, workshops]);
-    
+    //Add useEffect to set initial workshop title
+    // useEffect(() => {
+    //     if (noteData.workshop && workshops) {
+    //         const currentWorkshop = workshops.find(w => w.id === Number(noteData.workshop));
+    //         if (currentWorkshop) {
+    //             setSelectMenuTitle(currentWorkshop.title);
+    //         }
+    //     }
+    // }, [noteData.workshop, workshops]);
 
     const handleSelection = (e) => {
         const choice = e.target.getAttribute('data-value');
@@ -31,22 +41,26 @@ const SelectWorkshop = ({ workshops, noteData, setNoteData }) => {
     };
 
     return (
-        <div className='bg-white'>
-            <button
-                onClick={toggleDropdown}
-                className={`${
-                    choosingWorkshop
-                        ? 'hidden'
-                        : 'text-center w-60 font-main font-light text-lg bg-yellow-light/70 rounded py-2 border-2 border-yellow-dark/80'
-                }`}
-            >
-                {selectMenuTitle}
-            </button>
+        <div className='bg-white rounded shadow-md shadow-gray-700 font-main'>
+            {/* Drop Down Menu Container */}
+            <div className='bg-yellow-light/20'>
+                <button
+                    onClick={toggleDropdown}
+                    className='flex items-center justify-evenly w-72 font-main text-xl font-light bg-yellow-light/90 py-3 md:w-80'
+                >
+                    {selectMenuTitle}
+                    {choosingWorkshop ? (
+                        <HiOutlineChevronDoubleUp onClick={toggleDropdown} />
+                    ) : (
+                        <HiOutlineChevronDoubleDown onClick={toggleDropdown} />
+                    )}
+                </button>
+            </div>
             <ul
                 role='menu'
                 className={`${
                     choosingWorkshop
-                        ? 'bg-yellow-light/70 rounded p-5 w-72  border-2 border-yellow-dark/80 h-96 overflow-y-auto'
+                        ? 'bg-yellow-light/70 pt-4 font-accent tracking-wider text-xl p-5 max-h-96 overflow-y-auto border-t-2 border-yellow-dark/80'
                         : 'hidden'
                 }`}
             >
@@ -57,7 +71,7 @@ const SelectWorkshop = ({ workshops, noteData, setNoteData }) => {
                             data-value={workshop?.id}
                             data-title={workshop?.title}
                             onClick={handleSelection}
-                            className='shadow-md mb-2 shadow-yellow-dark p-2 cursor-pointer hover:scale-105 ease-in-out duration-300'
+                            className='shadow-md mb-4 shadow-yellow-dark p-4 cursor-pointer hover:scale-105 ease-in-out duration-300'
                             key={workshop.id}
                         >
                             {workshop?.title}

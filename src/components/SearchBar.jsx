@@ -34,7 +34,7 @@ const SearchBar = ({
 
     return (
         <section
-            className={`mt-8 size-fit flex items-center mx-auto rounded shadow-inner p-2.5 ${
+            className={`size-fit flex items-center rounded shadow-inner py-0.5 px-2 lg:px-3 ${
                 color === 'pink'
                     ? 'bg-pink-light/30 border-[1px] border-pink-dark/70 focus-within:shadow-pink-dark/70'
                     : 'bg-orange-light/30 border-[1px] border-orange-dark/70 focus-within:shadow-orange-dark/70'
@@ -46,7 +46,7 @@ const SearchBar = ({
                 onKeyDown={handleKeyDown}
                 aria-description={placeholder}
                 type='search'
-                className={`focus-visible:outline-none bg-transparent w-56 font-light text-lg pl-1`}
+                className={`focus-visible:outline-none bg-transparent w-56 font-light text-lg pl-1 lg:w-64 xl:w-72`}
             />
 
             <button onClick={handleFilter}>

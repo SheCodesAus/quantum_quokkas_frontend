@@ -5,10 +5,12 @@ import Error from '../components/Error';
 import AddWorkshopButton from '../components/AddWorkshopButton';
 import SearchBar from '../components/SearchBar';
 import orange from '/custom-btns/orange-search.svg';
+import { useAuth } from '../hooks/use-auth';
 
 const Workshops = () => {
     const { workshops, setWorkshops, isLoading, error } = useWorkshops();
-
+    const {auth} = useAuth()
+    console.log(auth.isSuper, auth.isAdmin)
     // Callback function to filter workshops
     const filterWorkshops = (filteredList) => {
         setWorkshops(filteredList);
@@ -40,6 +42,9 @@ const Workshops = () => {
             <h1 className='text-3xl text-center font-light md:text-start lg:ml-12'>
                 All Workshops
             </h1>
+            {auth.isSuper || auth.isAdmin ? (
+                <AddWorkshopButton />
+            ): null}
 
             {/* Searchbar */}
             <div className='w-fit mx-auto lg:mx-0 lg:ml-16'>

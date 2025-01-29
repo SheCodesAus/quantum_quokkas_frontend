@@ -35,32 +35,37 @@ const Workshop = () => {
     }
 
     return (
-        <main className='min-h-screen md:mt-8 md:ml-48 lg:ml-52 xl:ml-60 font-main'>
-            {/* Workshop Title */}
-            <h1 className='text-3xl font-accent tracking-wide pl-5 mb-2'>
-                {workshop?.title}
-            </h1>
+        <main className='min-h-screen md:mt-8 md:ml-44 lg:ml-48 font-main lg:grid grid-cols-2'>
+            <div className='lg:w-[340px]'>
+                {/* Workshop Title */}
+                <h1 className='text-3xl font-accent tracking-wide pl-5 mb-2'>
+                    {workshop?.title}
+                </h1>
 
-            {/* Description */}
-            <p className='w-4/5 mx-auto font-light md:text-lg lg:w-3/5'>
-                {workshop?.description}
-            </p>
+                {/* Description */}
+                <p className='w-4/5 mx-auto font-light md:text-lg'>
+                    {workshop?.description}
+                </p>
 
-            {/* Post Note Button & Searchbar Container */}
-            <div className='flex flex-col items-center mx-auto mt-4 gap-4 md:flex-row md:items-start md:justify-evenly'>
-                <section className='w-36 h-12 md:w-44 md:h-14'>
-                    <PostNoteBtn workshopTitle={workshop?.title} color='pink' />
-                </section>
-                <div className='md:mt-12'>
-                    {/* Searchbar */}
-                    <SearchBar
-                        list={workshop?.notes}
-                        filterFunc={filterWorkshopNotes}
-                        filterByKeyword={filterByKeyword}
-                        color='pink'
-                        image={pink}
-                        placeholder={`Search notes`}
-                    />
+                {/* Post Note Button & Searchbar Container */}
+                <div className='flex flex-col items-center mx-auto mt-4 gap-4 lg:items-start'>
+                    <section className='w-36 h-12 md:w-44 md:h-14'>
+                        <PostNoteBtn
+                            workshopTitle={workshop?.title}
+                            color='pink'
+                        />
+                    </section>
+                    <div className='md:mt-4'>
+                        {/* Searchbar */}
+                        <SearchBar
+                            list={workshop?.notes}
+                            filterFunc={filterWorkshopNotes}
+                            filterByKeyword={filterByKeyword}
+                            color='pink'
+                            image={pink}
+                            placeholder={`Search notes`}
+                        />
+                    </div>
                 </div>
             </div>
 

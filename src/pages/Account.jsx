@@ -20,7 +20,7 @@ const Account = () => {
                 >
                     Notes
                 </NavLink>
-                {auth.isSuper === true || auth.isAdmin === true  ? (
+                {auth.isSuper == true || auth.isAdmin == true  ? (
                     <NavLink
                         to='/account/workshops'
                         className={({ isActive }) =>

@@ -6,7 +6,8 @@ import './index.css';
 
 import { AuthProvider } from './components/AuthProvider';
 
-import Nav from './components/Nav';
+//import Nav from './components/Nav';
+import Nav from './components/Nav/Nav';
 import Home from './pages/Home';
 import Account from './pages/Account';
 import Login from './pages/Login';

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const SearchBar = ({
@@ -10,6 +10,7 @@ const SearchBar = ({
     placeholder,
 }) => {
     const navigate = useNavigate();
+    const inputRef = useRef(null)
     const [searchWord, setSearchWord] = useState('');
 
     // set searchWord to what the user types in
@@ -22,6 +23,7 @@ const SearchBar = ({
     };
 
     const handleFilter = () => {
+        inputRef.current.blur()
         const filteredList = filterByKeyword(list, searchWord);
         filterFunc(filteredList);
     };
@@ -41,12 +43,13 @@ const SearchBar = ({
             }`}
         >
             <input
+            ref={inputRef}
                 placeholder={placeholder}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
                 aria-description={placeholder}
                 type='search'
-                className={`focus-visible:outline-none bg-transparent w-56 font-light text-lg pl-1 lg:w-64 xl:w-72`}
+                className={`focus-visible:outline-none bg-transparent w-56 font-light text-lg pl-1 lg:w-64`}
             />
 
             <button onClick={handleFilter}>

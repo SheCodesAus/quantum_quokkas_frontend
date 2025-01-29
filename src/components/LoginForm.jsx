@@ -7,6 +7,7 @@ import z from 'zod';
 import postLogin from '../api/post/post-login.js';
 import login from '/note-icons/login.png';
 import toast from 'react-hot-toast';
+import getUser from '../api/get/get-user.js';
 
 const loginSchema = z.object({
     username: z.string().min(5, 'Username required'),
@@ -46,19 +47,26 @@ function LoginForm() {
             return;
         } else {
             try {
-                const response = await postLogin(
+                const loginResponse = await postLogin(
                     result.data.username,
                     result.data.password
                 );
-                window.localStorage.setItem('token', response.token);
-                window.localStorage.setItem('user_id', response.user_id);
-                window.localStorage.setItem('first_name', response.first_name);
+                window.localStorage.setItem('token', loginResponse.token);
+                window.localStorage.setItem('user_id', loginResponse.user_id);
+                window.localStorage.setItem('first_name', loginResponse.first_name);
+
+                // Get extra info on user
+                const userData = await getUser(loginResponse.user_id);
+                window.localStorage.setItem('is_superuser', userData.is_superuser);
+                window.localStorage.setItem('is_staff', userData.is_staff);
                 setAuth({
-                    token: response.token,
-                    userId: response.user_id,
-                    firstName: response.first_name,
+                    token: loginResponse.token,
+                    userId: loginResponse.user_id,
+                    firstName: loginResponse.first_name,
+                    isSuper: userData.is_superuser,
+                    isAdmin: userData.is_staff,
                 });
-                toast(`Welcome back ${response.first_name}!`);
+                toast(`Welcome back ${loginResponse.first_name}!`);
                 navigate(from);
             } catch (error) {
                 toast(error.message);
@@ -114,7 +122,11 @@ function LoginForm() {
             {/* Notice */}
             <p className='font-main font-light text-xl italic md:text-2xl'>
                 Don't have an account yet?
-                <Link className='font-medium not-italic ml-2' to='/signup' state={{from}}>
+                <Link
+                    className='font-medium not-italic ml-2'
+                    to='/signup'
+                    state={{ from }}
+                >
                     {' '}
                     Sign up!
                 </Link>

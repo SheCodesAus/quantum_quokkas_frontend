@@ -1,11 +1,11 @@
 const PostNoteCard = ({ notes }) => {
     return (
-        <section className='grid grid-cols-1 w-fit mx-auto my-4 gap-2 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-3 xl:grid-cols-4'>
+        <section className='grid grid-cols-1 w-fit mx-auto my-4 gap-2 md:grid-cols-2 md:gap-6 lg:ml-[-70px] lg:gap-3 xl:grid-cols-3 xl:ml-[-200px]'>
             {notes?.notes.map((note) => {
                 return (
                     <article
                         key={note.id}
-                        className='bg-note bg-cover size-52 lg:size-64 flex justify-center'
+                        className='bg-note bg-cover size-52 lg:size-60 flex justify-center'
                     >
                         <p
                             className={`font-note tracking-wide ml-[-8px] w-44 h-fit my-auto ${

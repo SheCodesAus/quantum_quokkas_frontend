@@ -1,7 +1,5 @@
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import { useAuth } from '../hooks/use-auth';
-import UsersNotes from '../components/UsersNotes';
-import UsersWorkshops from '../components/UsersWorkshops';
 
 const Account = () => {
     const { auth } = useAuth();
@@ -22,16 +20,18 @@ const Account = () => {
                 >
                     Notes
                 </NavLink>
-                <NavLink
-                    to='/account/workshops'
-                    className={({ isActive }) =>
-                        isActive
-                            ? 'border-[1px] p-1.5 rounded border-green-dark'
-                            : 'border-[1px] p-1.5 border-transparent'
-                    }
-                >
-                    Workshops
-                </NavLink>
+                {auth.isSuper == true || auth.isAdmin == true  ? (
+                    <NavLink
+                        to='/account/workshops'
+                        className={({ isActive }) =>
+                            isActive
+                                ? 'border-[1px] p-1.5 rounded border-green-dark'
+                                : 'border-[1px] p-1.5 border-transparent'
+                        }
+                    >
+                        Workshops
+                    </NavLink>
+                ) : null}
                 <NavLink
                     to='/account/editprofile'
                     className={({ isActive }) =>

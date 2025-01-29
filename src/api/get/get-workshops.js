@@ -15,7 +15,9 @@ async function getWorkshops() {
         throw new Error(errorMsg);
     }
 
-    return await response.json();
+    const workshops = await response.json()
+
+    return workshops.sort((a, b) => new Date(b.start_date) - new Date(a.start_date))
 }
 
 export default getWorkshops;

@@ -7,10 +7,29 @@ import pink from '/custom-btns/pink-search.svg';
 import PostNoteBtn from '../components/PostNoteBtn';
 import { useEffect, useState } from 'react';
 import PostNoteCard from '../components/PostNoteCard';
+import { formatDate } from '../utils/date-formatter';
 
 const Workshop = () => {
     const { id } = useParams();
     const { workshop, setWorkshop, isLoading, error } = useWorkshop(id);
+
+    // logic to display post-note-btn
+    const [canPostNote, setCanPostNote] = useState(true);
+
+    useEffect(() => {
+        if (!workshop?.start_date) return;
+
+        const workshopDate = new Date(workshop?.start_date);
+        const today = new Date();
+        const thirtyDaysAgo = new Date();
+        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+        if (workshopDate > today || workshopDate < thirtyDaysAgo) {
+            setCanPostNote(false);
+        } else {
+            setCanPostNote(true);
+        }
+    }, [workshop?.start_date]);
 
     // callback function to filter notes
     const filterWorkshopNotes = (filteredList) => {
@@ -35,37 +54,61 @@ const Workshop = () => {
     }
 
     return (
-        <main className='min-h-screen md:mt-8 md:ml-48 lg:ml-52 xl:ml-60 font-main'>
-            {/* Workshop Title */}
-            <h1 className='text-3xl font-accent tracking-wide pl-5 mb-2'>
-                {workshop?.title}
-            </h1>
+        <main className='min-h-screen md:mt-8 md:ml-44 lg:ml-48 font-main lg:grid grid-cols-2 auto-rows-min'>
+            <aside className='lg:w-[340px] space-y-4'>
+                {/* Title */}
+                <h1 className='text-3xl font-accent tracking-wider pl-5 mb-2 text-center'>
+                    {workshop?.title}
+                </h1>
 
-            {/* Description */}
-            <p className='w-4/5 mx-auto font-light md:text-lg lg:w-3/5'>
-                {workshop?.description}
-            </p>
+                {/* Owner */}
+                <h2 className='font-accent tracking wide text-xl text-center'>
+                    - Hosted by {workshop?.owner.first_name} -
+                </h2>
 
-            {/* Post Note Button & Searchbar Container */}
-            <div className='flex flex-col items-center mx-auto mt-4 gap-4 md:flex-row md:items-start md:justify-evenly'>
-                <section className='w-36 h-12 md:w-44 md:h-14'>
-                    <PostNoteBtn workshopTitle={workshop?.title} color='pink' />
+                {/* Date */}
+                <p className='font-light text-center'>
+                    {formatDate(workshop?.start_date)}
+                </p>
+
+                {/* Description */}
+                <p className='w-4/5 mx-auto font-light md:text-lg'>
+                    {workshop?.description}
+                </p>
+
+                {/* Post Note Button Container */}
+                <section className='w-36 h-12 mx-auto mt-4 md:w-44 md:h-14'>
+                    {canPostNote ? (
+                        // Workshop accepting notes
+                        <PostNoteBtn
+                            workshopTitle={workshop?.title}
+                            color='pink'
+                        />
+                    ) : (
+                        // Workshop not accepting notes
+                        <p className='font-light w-72 ml-[-50px] lg:ml-0 italic'>
+                            Notes for this workshop are closed
+                        </p>
+                    )}
                 </section>
-                <div className='md:mt-12'>
-                    {/* Searchbar */}
-                    <SearchBar
-                        list={workshop?.notes}
-                        filterFunc={filterWorkshopNotes}
-                        filterByKeyword={filterByKeyword}
-                        color='pink'
-                        image={pink}
-                        placeholder={`Search notes`}
-                    />
-                </div>
-            </div>
+            </aside>
+
+            {/* Searchbar */}
+            <section className='w-fit mx-auto mt-4 lg:mt-0 lg:mx-0 lg:col-start-2 lg:row-start-1 relative z-100'>
+                <SearchBar
+                    list={workshop?.notes}
+                    filterFunc={filterWorkshopNotes}
+                    filterByKeyword={filterByKeyword}
+                    color='pink'
+                    image={pink}
+                    placeholder={`Search ${workshop?.notes.length} notes`}
+                />
+            </section>
 
             {/* List of Workshop's Notes */}
-            <PostNoteCard notes={workshop} />
+            <section className='lg:col-start-2 lg:row-start-1 lg:mt-20'>
+                <PostNoteCard notes={workshop} />
+            </section>
         </main>
     );
 };

@@ -1,7 +1,13 @@
 async function getNote(noteId) {
     const url = `${import.meta.env.VITE_API_URL}/notes/${noteId}/`;
+    const token = window.localStorage.getItem("token");
 
-    const response = await fetch(url, { method: 'GET' });
+    const response = await fetch(url, { 
+        method: 'GET',
+        headers: {
+            'Authorization': `Token ${token}`,
+        } 
+    });
 
     if (!response.ok) {
         const fallbackError = 'Oops! Looks like we are having issues with this note';

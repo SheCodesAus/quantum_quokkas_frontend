@@ -1,7 +1,13 @@
 async function getWorkshop(workshopId) {
     const url = `${import.meta.env.VITE_API_URL}/workshops/${workshopId}/`;
+    const token = window.localStorage.getItem("token");
 
-    const response = await fetch(url, { method: 'GET' });
+    const response = await fetch(url, { 
+        method: "GET",
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+    });
 
     if (!response.ok) {
         const fallbackError =

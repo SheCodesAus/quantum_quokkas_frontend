@@ -8,6 +8,7 @@ import close from '/custom-btns/close.png';
 import logo from '/logo/logo.png';
 import Desktop from './Desktop';
 import Mobile from './Mobile';
+import Footer from '../Footer';
 
 const Nav = () => {
     const { auth, setAuth } = useAuth();
@@ -94,14 +95,15 @@ const Nav = () => {
                     showNav={showNav}
                 />
             </nav>
-            <ScrollRestoration />
             <section
                 className={`${
                     showNav ? 'hidden' : 'min-h-screen mt-10 md:mt-36 lg:mt-20'
                 }`}
             >
-                <Outlet context={handleRedirect} />
+                <Outlet context={{ handleRedirect, handleLogout }} />
             </section>
+            <Footer />
+            <ScrollRestoration />
         </main>
     );
 };

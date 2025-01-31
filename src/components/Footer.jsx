@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/use-auth';
 import toast from 'react-hot-toast';
 
 const Footer = () => {
     const { auth, setAuth } = useAuth();
+    const navigate = useNavigate()
 
     const handleLogout = () => {
         toast('Goodbye!');
@@ -12,7 +13,7 @@ const Footer = () => {
             window.localStorage.removeItem('user_id');
             window.localStorage.removeItem('first_name');
             setAuth({ token: null, user: '', firstName: '' });
-            navigate(0);
+            navigate('/');
         }, 700);
     };
 

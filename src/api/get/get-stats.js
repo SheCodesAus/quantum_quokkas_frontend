@@ -1,13 +1,12 @@
-async function getNotes() {
-    const url = `${import.meta.env.VITE_API_URL}/notes/`;
+async function getStats() {
+    const url = `${import.meta.env.VITE_API_URL}/counts/`;
 
     const response = await fetch(url, {
         method: 'GET',
     });
 
     if (!response.ok) {
-        const fallbackError =
-            'Oops! Looks like we are having issues with notes right now';
+        const fallbackError = 'Oops! Looks like we are having issues right now';
 
         const data = await response.json().catch(() => {
             throw new Error(fallbackError);
@@ -20,4 +19,4 @@ async function getNotes() {
     return await response.json();
 }
 
-export default getNotes;
+export default getStats;

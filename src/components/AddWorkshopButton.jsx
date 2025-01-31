@@ -1,10 +1,9 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function AddWorkshopButton() {
   const navigate = useNavigate();
 
-  return <button onClick={() => navigate("/newworkshop")}>Add Workshop</button>;
+  return <button className="font-light border-[1px] border-orange-dark/70 p-2 rounded shadow-sm shadow-orange-dark/80 bg-orange-light/50" onClick={() => navigate("/newworkshop")}>Add Workshop</button>;
 }
 
 export default AddWorkshopButton;

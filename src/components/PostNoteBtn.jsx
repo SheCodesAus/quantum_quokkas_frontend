@@ -11,7 +11,7 @@ const PostNoteBtn = ({color, workshopTitle}) => {
                 <NavLink
                     className={`flex w-full h-full justify-center items-center rounded border-[1px] font-accent tracking-wide text-2xl shadow-sm md:text-3xl hover:shadow-lg ease-in-out duration-500 ${
                         color === 'yellow'
-                            ? 'bg-yellow-light/95 border-yellow-dark/60 shadow-yellow-dark hover:shadow-yellow-dark'
+                            ? 'bg-yellow-light/95 border-yellow-dark/60 hover:shadow-yellow-dark'
                             : 'bg-pink-light/95 border-pink-dark/60 shadow-pink-dark hover:shadow-pink-dark'
                     }`}
                     to='/newnote'

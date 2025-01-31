@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
     HiOutlineChevronDoubleDown,
     HiOutlineChevronDoubleUp,
@@ -18,16 +18,6 @@ const SelectWorkshop = ({
     const toggleDropdown = () => {
         setChoosingWorkshop(!choosingWorkshop);
     };
-
-    //Add useEffect to set initial workshop title
-    // useEffect(() => {
-    //     if (noteData.workshop && workshops) {
-    //         const currentWorkshop = workshops.find(w => w.id === Number(noteData.workshop));
-    //         if (currentWorkshop) {
-    //             setSelectMenuTitle(currentWorkshop.title);
-    //         }
-    //     }
-    // }, [noteData.workshop, workshops]);
 
     const handleSelection = (e) => {
         const choice = e.target.getAttribute('data-value');

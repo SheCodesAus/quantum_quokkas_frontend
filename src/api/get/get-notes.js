@@ -1,7 +1,11 @@
 async function getNotes() {
     const url = `${import.meta.env.VITE_API_URL}/notes/`;
+   
+    const response = await fetch(url, { 
+        method: 'GET' 
+    });
 
-    const response = await fetch(url, { method: 'GET' });
+
 
     if (!response.ok) {
         const fallbackError =

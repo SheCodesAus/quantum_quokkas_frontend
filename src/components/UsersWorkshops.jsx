@@ -1,6 +1,6 @@
+import EditWorkshopForm from "../components/EditWorkshopForm";
+
 const UsersWorkshops = () => {
-  return (
-    <div>If the user has created workshops they will appear here</div>
-  )
+  return <EditWorkshopForm />;
 }
 export default UsersWorkshops

@@ -6,7 +6,6 @@ import './index.css';
 
 import { AuthProvider } from './components/AuthProvider';
 
-//import Nav from './components/Nav';
 import Nav from './components/Nav/Nav';
 import Home from './pages/Home';
 import Account from './pages/Account';
@@ -21,7 +20,7 @@ import NewWorkshop from './pages/NewWorkshop';
 import UsersNotes from './components/UsersNotes';
 import UsersWorkshops from './components/UsersWorkshops';
 import EditProfile from './components/EditProfile';
-import Loader from './components/Loader';
+import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
     {
@@ -29,7 +28,7 @@ const router = createBrowserRouter([
         element: <Nav />,
         children: [
             { path: '/', element: <Home /> },
-            { path: '/loader', element: <Loader /> },
+            { path: '/error', element: <ErrorPage /> },
             {
                 path: '/account',
                 element: <Account />,

@@ -3,7 +3,7 @@ async function getUser(userId) {
     const token = window.localStorage.getItem("token");
 
     if (!token) {
-        throw new Error('Authentication token is required');
+        throw new Error('Please log in to view this information');
     }
 
     const response = await fetch(url, {

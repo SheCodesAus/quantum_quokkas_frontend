@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { formatDate } from '../utils/date-formatter';
 import { truncateString } from '../utils/truncate-string';
+import pin from '/custom-btns/pin.svg';
 
 const WorkshopCard = ({ workshops, color, truncate }) => {
 
@@ -24,6 +25,11 @@ const WorkshopCard = ({ workshops, color, truncate }) => {
                         <h3 className='text-xl font-accent tracking-wide pl-5 lg:text-2xl'>
                             Hosted by {workshop?.owner?.first_name}
                         </h3>
+                        {/* Notes Total */}
+                        <div className='flex gap-2'>
+                            <img src={pin} className='w-5' alt='' />
+                            <p className='font-light'>{workshop?.notes.length} notes posted</p>
+                        </div>
                         {/* Description */}
                         <p
                             className={`${
@@ -37,7 +43,9 @@ const WorkshopCard = ({ workshops, color, truncate }) => {
                         {/* Date */}
                         <h4
                             className={`${
-                                color === 'purple' ? 'border-purple-dark' : 'border-orange-dark'
+                                color === 'purple'
+                                    ? 'border-purple-dark'
+                                    : 'border-orange-dark'
                             } text-lg font-light border-b-[1px] w-2/5 pb-2`}
                         >
                             {formatDate(workshop?.start_date)}

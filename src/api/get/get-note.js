@@ -10,7 +10,8 @@ async function getNote(noteId) {
     });
 
     if (!response.ok) {
-        const fallbackError = 'Oops! Looks like we are having issues with this note';
+        const fallbackError =
+            'Oops! Looks like we are having issues with this note';
 
         const data = await response.json().catch(() => {
             throw new Error(fallbackError);

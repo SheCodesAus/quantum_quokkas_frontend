@@ -55,6 +55,7 @@ function LoginForm() {
                 window.localStorage.setItem('user_id', loginResponse.user_id);
                 window.localStorage.setItem('first_name', loginResponse.first_name);
 
+
                 // Get extra info on user
                 const userData = await getUser(loginResponse.user_id);
                 window.localStorage.setItem('is_superuser', userData.is_superuser);

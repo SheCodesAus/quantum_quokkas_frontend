@@ -5,7 +5,7 @@ async function getActiveWorkshops() {
 
     if (!response.ok) {
         const fallbackError =
-            'Oops! Looks like we are having issues with workshops right now';
+            'Oh no! Looks like we are having some issues with workshops right now';
 
         const data = await response.json().catch(() => {
             throw new Error(fallbackError);

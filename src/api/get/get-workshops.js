@@ -1,11 +1,11 @@
 async function getWorkshops() {
     const url = `${import.meta.env.VITE_API_URL}/workshops/`;
-
+    
     const response = await fetch(url, { method: 'GET' });
 
     if (!response.ok) {
         const fallbackError =
-            'Oops! Looks like we are having issues with workshops right now';
+            'Oh no! Looks like we are having issues with the workshops right now';
 
         const data = await response.json().catch(() => {
             throw new Error(fallbackError);
@@ -15,9 +15,11 @@ async function getWorkshops() {
         throw new Error(errorMsg);
     }
 
-    const workshops = await response.json()
+    const workshops = await response.json();
 
-    return workshops.sort((a, b) => new Date(b.start_date) - new Date(a.start_date))
+    return workshops.sort(
+        (a, b) => new Date(b.start_date) - new Date(a.start_date)
+    );
 }
 
 export default getWorkshops;

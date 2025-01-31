@@ -1,13 +1,14 @@
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { formatDate } from '../utils/date-formatter';
 import useWorkshop from '../hooks/use-workshop';
 import Loader from '../components/Loader';
-import Error from '../components/Error';
 import SearchBar from '../components/SearchBar';
-import pink from '/custom-btns/pink-search.svg';
 import PostNoteBtn from '../components/PostNoteBtn';
-import { useEffect, useState } from 'react';
 import PostNoteCard from '../components/PostNoteCard';
-import { formatDate } from '../utils/date-formatter';
+import ErrorPage from './ErrorPage';
+
+import pink from '/custom-btns/pink-search.svg';
 
 const Workshop = () => {
     const { id } = useParams();
@@ -50,7 +51,7 @@ const Workshop = () => {
     }
 
     if (error) {
-        return <Error errorMessage={error.message} />;
+        return <ErrorPage errorMessage={error.message} />;
     }
 
     return (
@@ -86,7 +87,7 @@ const Workshop = () => {
                         />
                     ) : (
                         // Workshop not accepting notes
-                        <p className='font-light w-72 ml-[-50px] lg:ml-0 italic'>
+                        <p className='font-light w-72 ml-[-50px] italic'>
                             Notes for this workshop are closed
                         </p>
                     )}

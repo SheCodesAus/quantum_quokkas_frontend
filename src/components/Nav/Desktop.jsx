@@ -5,6 +5,7 @@ import logo from '/logo/logo.png';
 
 const Desktop = ({ handleLogout, handleRedirect }) => {
     const { auth } = useAuth();
+
     return (
         <section className='hidden md:flex fixed left-0 w-full'>
             {/* Logo / Home */}
@@ -15,7 +16,7 @@ const Desktop = ({ handleLogout, handleRedirect }) => {
                     alt='Three sticky notes stacked on top of eachother with the word postitivity in the center of the top sticky note'
                 />
             </Link>
-            <div className='flex h-20 items-center font-accent text-xl lg:text-2xl w-full justify-evenly bg-pink-50/80'>
+            <div className='flex h-20 items-center font-accent text-lg lg:text-2xl w-full justify-evenly bg-pink-50/80'>
                 {/* Home */}
                 <NavLink
                     className={({ isActive }) =>
@@ -60,6 +61,7 @@ const Desktop = ({ handleLogout, handleRedirect }) => {
                 >
                     Workshops
                 </NavLink>
+
                 {!auth.token ? (
                     // Log In
                     <NavLink

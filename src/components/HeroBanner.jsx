@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import useRecentNotes from '../hooks/use-recent-notes';
 import Loader from './Loader';
-import Error from './Error';
+import Error from './ErrorMessage';
 
 const HeroBanner = () => {
     const { notes, isLoading, error } = useRecentNotes();
@@ -13,7 +13,7 @@ const HeroBanner = () => {
             //setIndex((prev) => (prev + 1) % notes.length);
             setIndex((prev) => (prev + 1) % 5);
         };
-        intervalRef.current = setInterval(increaseIndex, 3500);
+        intervalRef.current = setInterval(increaseIndex, 2000);
 
         return () => {
             clearInterval(intervalRef.current);
@@ -29,32 +29,35 @@ const HeroBanner = () => {
     }
 
     return (
-        <article className='bg-hero bg-cover size-80 flex flex-col justify-center mx-auto md:mx-10 lg:mx-0 xl:mx-auto md:size-96'>
+        <article className='bg-hero bg-cover size-80 flex flex-col justify-center mx-auto lg:mx-0 xl:mx-auto'>
             {/* Text Container */}
-            <div className='p-6 mt-14 md:mt-20 md:ml-4 h-full flex flex-col justify-between font-note'>
+            <div className='p-6 mt-12 h-full flex flex-col justify-between font-note'>
                 {/* Note Content */}
-                {/* <p className='max-w-[90%] text-xl md:text-2xl'> */}
                 <p
-                    className={`font-note tracking-wide w-60 h-fit ${
-                        // less than 20 char
-                        notes[index].content.length <= 20
-                            ? 'text-6xl'
-                            : // more than 20 but less than 40 char
-                            notes[index].content.length > 20 &&
-                              notes[index].content.length <= 40
-                            ? 'text-4xl'
-                            : // more than 40 but less than 60 char
-                            notes[index].content.length > 40 &&
-                              notes[index].content.length <= 60
+                    className={`font-note tracking-wide text-center w-60 h-fit ${
+                        // less than 15 characters
+                        notes[index].content.length <= 15
+                            ? 'text-6xl mt-2'
+                            : // more than 15 but less than 30 characters
+                            notes[index].content.length > 15 &&
+                              notes[index].content.length <= 30
+                            ? 'text-5xl mt-2'
+                            : // more than 30 but less than 45
+                            notes[index].content.length > 30 &&
+                              notes[index].content.length <= 45
+                            ? 'text-4xl mt-1'
+                            : // more than 45 but less than 60 characters
+                            notes[index].content.length > 45 &&
+                              notes[index].content.length <= 65
                             ? 'text-3xl'
-                            : // more than 60 char
-                              'text-2xl pt-5'
+                            : // more than 60 characters
+                              'text-2xl'
                     }`}
                 >
                     {notes[index]?.content}
                 </p>
                 {/* Name of Note Poster */}
-                <p className='text-3xl md:text-3xl'>
+                <p className='text-3xl mb-[-10px]'>
                     - {notes[index]?.user.first_name}
                 </p>
             </div>

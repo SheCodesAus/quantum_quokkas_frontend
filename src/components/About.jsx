@@ -1,5 +1,6 @@
 import HeroBanner from './HeroBanner';
 import PostNoteBtn from './PostNoteBtn';
+import Stats from './Stats';
 
 const About = () => {
     return (
@@ -14,14 +15,18 @@ const About = () => {
                 celebrated, no matter how small.
             </h1>
 
-            {/* Note Slideshow */}
-            <div className='min-h-[325px] md:min-h-96 lg:col-start-2'>
-                <HeroBanner />
+            <div className='lg:col-start-2'>
+                {/* Statistics */}
+                <Stats />
+                {/* Note Slideshow */}
+                <div className='mt-6 min-h-[325px] md:min-h-96 md:mt-8'>
+                    <HeroBanner />
+                </div>
             </div>
 
             {/* About Bio */}
             <section className='lg:row-start-2 lg:ml-12 xl:ml-16'>
-                <p className='font-main text-base font-light w-4/5 mx-auto mb-6 md:mx-0 md:text-lg'>
+                <p className='font-main text-base font-light w-4/5 mx-auto md:mx-0 md:text-lg'>
                     At post
                     <span className='font-accent text-4xl ml-1 mr-0.5'>it</span>
                     ivity, we put the focus on ‘the little wins’ that build
@@ -33,14 +38,14 @@ const About = () => {
                 </p>
 
                 {/* Post A Note Button */}
-                <section className='flex flex-col items-center space-y-6 md:mx-0 md:border-t-[1px] border-purple-dark/80 pt-6 lg:w-11/12'>
+                {/* <section className='flex flex-col items-center space-y-6 md:mx-0 md:border-t-[1px] border-purple-dark/80 pt-6 lg:w-11/12'>
                     <h3 className='font-main text-xl font-light italic'>
                         Got a note to add to a workshop?
                     </h3>
                     <div className='w-44 h-16 flex place-item-center'>
                         <PostNoteBtn color='yellow' />
                     </div>
-                </section>
+                </section> */}
             </section>
         </main>
     );

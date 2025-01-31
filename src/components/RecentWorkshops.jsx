@@ -11,7 +11,7 @@ const RecentWorkshops = () => {
     }
 
     return (
-        <main className='font-main mt-10 md:mt-24'>
+        <main className='font-main mt-10 md:mt-5 lg:mt-0'>
             {/* Title */}
             <h2 className='text-2xl font-light md:3xl pl-12 md:mr-2 pt-6 pb-3 mb-4 border-b-[2px] border-purple-dark'>
                 Recent Workshops

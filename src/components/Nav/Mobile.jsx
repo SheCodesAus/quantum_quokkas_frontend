@@ -9,9 +9,11 @@ import signup from '/note-icons/signup.png';
 import account from '/note-icons/account.png';
 import newworkshop from '/note-icons/newworkshop.png';
 import logout from '/note-icons/logout.png';
+import useStatus from '../../hooks/use-status';
 
 const Mobile = ({ handleClick, handleLogout, handleRedirect, showNav }) => {
     const { auth } = useAuth();
+    const { isAdminOrSuper } = useStatus(auth.userId);
 
     return (
         <section
@@ -125,7 +127,7 @@ const Mobile = ({ handleClick, handleLogout, handleRedirect, showNav }) => {
                         </Link>
 
                         {/* New Workshop */}
-                        {auth.isSuper === true || auth.isAdmin === true ? (
+                        {isAdminOrSuper && (
                             <Link
                                 onClick={handleClick}
                                 className='mt-[-20px] row-start-6 col-start-2 -skew-x-12 skew-y-12'
@@ -137,7 +139,7 @@ const Mobile = ({ handleClick, handleLogout, handleRedirect, showNav }) => {
                                     className='w-28'
                                 />
                             </Link>
-                        ) : null}
+                        )}
                     </>
                 )}
             </section>

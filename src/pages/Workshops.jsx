@@ -1,17 +1,18 @@
 import { useAuth } from '../hooks/use-auth';
 import useWorkshops from '../hooks/use-workshops';
-
 import Loader from '../components/Loader';
-import Error from '../components/Error';
 import AddWorkshopButton from '../components/AddWorkshopButton';
 import SearchBar from '../components/SearchBar';
 import WorkshopCard from '../components/WorkshopCard';
-
 import orange from '/custom-btns/orange-search.svg';
+import ErrorPage from './ErrorPage';
+import { useState } from 'react';
+import useStatus from '../hooks/use-status';
 
 const Workshops = () => {
     const { workshops, setWorkshops, isLoading, error } = useWorkshops();
     const { auth } = useAuth();
+    const { isAdminOrSuper } = useStatus(auth.userId);
 
     // Callback function to filter workshops
     const filterWorkshops = (filteredList) => {
@@ -29,7 +30,7 @@ const Workshops = () => {
     }
 
     if (error) {
-        return <Error errorMessage={error.message} />;
+        return <ErrorPage errorMessage={error.message} />;
     }
 
     return (
@@ -42,9 +43,9 @@ const Workshops = () => {
                 </span>
                 ivity Workshops
             </h1>
-            {auth.isSuper == true || auth.isAdmin == true ? (
-                <AddWorkshopButton />
-            ) : null}
+            
+            {/* Add Workshop Btn */}
+            {isAdminOrSuper && <AddWorkshopButton />}
 
             {/* Searchbar */}
             <div className='w-fit mx-auto lg:mx-0 lg:ml-16'>

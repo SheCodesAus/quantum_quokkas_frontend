@@ -10,7 +10,6 @@ import SelectWorkshop from './SelectWorkshop';
 function NewNoteForm() {
     const location = useLocation();
     const { workshopTitle } = location.state ? location.state : ''
-    console.log(workshopTitle);
 
     const { workshops, isLoading } = useActiveWorkshops();
     const [characterCounter, setCharacterCounter] = useState('0');
@@ -45,7 +44,6 @@ function NewNoteForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(noteData);
         const requiredFields = ['content', 'workshop'];
         const isFormValid = requiredFields.every(
             (field) => noteData[field].trim() !== ''
@@ -58,8 +56,7 @@ function NewNoteForm() {
                     toast('Posting your note!');
                 })
                 .catch((error) => {
-                    console.error('Failed to create note:', error);
-                    toast('Oops! Something went wrong, please try again later');
+                    toast(error.message);
                     navigate('/');
                 });
         }
@@ -120,28 +117,6 @@ function NewNoteForm() {
                         />
                     </div>
                 </div>
-
-                {/* Note Category */}
-                {/* <div>
-                  <label htmlFor='note_category'>Note Category:</label>
-                  <input
-                      type='text'
-                      id='note_category'
-                      onChange={handleChange}
-                      value={noteData.note_category}
-                  />
-              </div> */}
-
-                {/* Coding Language */}
-                {/* <div>
-                  <label htmlFor='coding_language'>Coding Language:</label>
-                  <input
-                      type='text'
-                      id='coding_language'
-                      onChange={handleChange}
-                      value={noteData.coding_language}
-                  />
-              </div> */}
 
                 {/* Submit Button */}
                 <button

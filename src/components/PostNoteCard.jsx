@@ -5,23 +5,30 @@ const PostNoteCard = ({ notes }) => {
                 return (
                     <article
                         key={note.id}
-                        className='bg-note bg-cover size-52 lg:size-60 flex justify-center'
+                        className='bg-note bg-cover size-52 md:size-56 lg:size-60 flex justify-center items-center'
                     >
                         <p
-                            className={`font-note tracking-wide ml-[-8px] w-44 h-fit my-auto ${
-                                // less than 20 char
-                                note.content.length <= 20
-                                    ? 'text-4xl'
-                                    : // more than 20 but less than 40 char
-                                    note.content.length > 20 &&
-                                      note.content.length <= 40
-                                    ? 'text-2xl'
-                                    : // more than 40 but less than 60 char
-                                    note.content.length > 40 &&
-                                      note.content.length <= 60
-                                    ? 'text-xl'
-                                    : // more than 60 char
-                                      'text-lg pt-5'
+                            className={`font-note tracking-wide ml-[-8px] w-44 h-fit text-center ${
+                                // 15 or less
+                                note.content.length <= 15
+                                    ? 'text-4xl mt-2'
+                                    : // 15 to 30
+                                    note.content.length > 15 &&
+                                      note.content.length <= 30
+                                    ? 'text-3xl mt-5'
+                                    : // 30 to 45
+                                    note.content.length > 30 &&
+                                      note.content.length <= 45
+                                    ? 'text-2xl mt-4 lg:text-[26px]'
+                                    : // 45 to 60
+                                    note.content.length > 45 &&
+                                      note.content.length <= 65
+                                    ? 'text-xl mt-4'
+                                    : // more than 60
+                                    note.content.length > 65 &&
+                                      note.content.length <= 70
+                                    ?  'text-lg mt-3 md:text-[19px]'
+                                    : 'text-[17px] md:text-lg md:mt-4'
                             }`}
                         >
                             {note.content}

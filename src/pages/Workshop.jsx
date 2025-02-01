@@ -82,7 +82,7 @@ const Workshop = () => {
                     {canPostNote ? (
                         // Workshop accepting notes
                         <PostNoteBtn
-                            workshopTitle={workshop?.title}
+                            selectedWorkshop={workshop}
                             color='pink'
                         />
                     ) : (

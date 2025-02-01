@@ -13,6 +13,23 @@ const SearchBar = ({
     const inputRef = useRef(null)
     const [searchWord, setSearchWord] = useState('');
 
+    // Convert search string to array of keywords, excluding common words
+    const parseSearchTerms = (searchString) => {
+        const commonWords = new Set(['and', 'or', 'the', 'a', 'an']);
+        return searchString
+            .toLowerCase()
+            .split(' ')
+            .filter(word => word.trim() && !commonWords.has(word.trim()));
+    };
+
+    // Check if item matches all search terms
+    const matchesAllTerms = (item, searchTerms) => {
+        return searchTerms.every(term => 
+            filterByKeyword([item], term).length > 0
+        );
+    };
+
+
     // set searchWord to what the user types in
     // if the input field is cleared, refresh page
     const handleChange = (e) => {
@@ -23,8 +40,19 @@ const SearchBar = ({
     };
 
     const handleFilter = () => {
-        inputRef.current.blur()
-        const filteredList = filterByKeyword(list, searchWord);
+        inputRef.current.blur();
+        const searchTerms = parseSearchTerms(searchWord);
+        
+        // If no valid search terms, don't filter
+        if (searchTerms.length === 0) {
+            return;
+        }
+
+        // Filter list where item matches ALL search terms
+        const filteredList = list.filter(item => 
+            matchesAllTerms(item, searchTerms)
+        );
+        
         filterFunc(filteredList);
     };
 

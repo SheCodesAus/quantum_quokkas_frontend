@@ -5,15 +5,17 @@ export default function useStatus(userId) {
     const [isAdminOrSuper, setIsAdminOrSuper] = useState(false);
 
     useEffect(() => {
-        getUser(userId)
-            .then((user) => {
-                if (user.is_superuser == true || user.is_staff == true) {
-                    setIsAdminOrSuper(true)
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        if (userId) {
+            getUser(userId)
+                .then((user) => {
+                    if (user.is_superuser == true || user.is_staff == true) {
+                        setIsAdminOrSuper(true);
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        } else return
     }, [userId]);
 
     return { isAdminOrSuper };

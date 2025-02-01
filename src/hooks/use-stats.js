@@ -10,7 +10,6 @@ export default function useStats() {
         getStats()
             .then((stats) => {
                 setStats(stats);
-                console.log(stats)
                 setIsLoading(false);
             })
             .catch((error) => {

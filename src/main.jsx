@@ -19,7 +19,8 @@ import UpdateNote from './pages/UpdateNote';
 import NewWorkshop from './pages/NewWorkshop';
 import UsersNotes from './components/UsersNotes';
 import UsersWorkshops from './components/UsersWorkshops';
-import EditProfile from './components/EditProfile';
+import UsersProfile from './components/UsersProfile';
+import EditProfileForm from './components/EditProfileForm';
 import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
@@ -35,7 +36,8 @@ const router = createBrowserRouter([
                 children: [
                     { path: '/account/notes', element: <UsersNotes /> },
                     { path: '/account/workshops', element: <UsersWorkshops /> },
-                    { path: '/account/editprofile', element: <EditProfile /> },
+                    { path: '/account/usersprofile', element: <UsersProfile /> },
+                    { path: '/account/editprofile', element: <EditProfileForm /> },
                 ],
             },
             { path: '/login', element: <Login /> },

@@ -2,16 +2,13 @@ async function getUser(userId) {
     const url = `${import.meta.env.VITE_API_URL}/users/${userId}/`;
     const token = window.localStorage.getItem("token");
 
-    if (!token) {
-        throw new Error('Please log in to view this information');
-    }
-
     const response = await fetch(url, {
         method: 'GET',
         headers: {
             'Authorization': `Token ${token}`,
         }
     });
+    
     if (!response.ok) {
         const fallbackError = 'Cannot retrieve user details';
 

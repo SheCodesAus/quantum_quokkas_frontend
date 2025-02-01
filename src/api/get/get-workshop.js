@@ -1,13 +1,9 @@
 async function getWorkshop(workshopId) {
     const url = `${import.meta.env.VITE_API_URL}/workshops/${workshopId}/`;
     //remove once permissions are updated
-    const token = window.localStorage.getItem('token');
 
     const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-            Authorization: `Token ${token}`,
-        },
+        method: 'GET'
     });
     //const response = await fetch(url, { method: 'GET' });
 

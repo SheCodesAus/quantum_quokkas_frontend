@@ -11,7 +11,8 @@ const SearchBar = ({
 }) => {
     const navigate = useNavigate();
     const inputRef = useRef(null)
-    const [searchWord, setSearchWord] = useState('');
+    const [currentWord, setCurrentWord] = useState('');
+    const [searchWords, setSearchWords] = useState([]);
 
     // Convert search string to array of keywords, excluding common words
     const parseSearchTerms = (searchString) => {

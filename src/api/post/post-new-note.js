@@ -12,8 +12,8 @@ async function postNewNote(noteData) {
       content: noteData.content,
       workshop: noteData.workshop,
       anonymous: noteData.anonymous,
-      note_category: noteData.note_category,
-      coding_language: noteData.coding_language,
+      note_category: '',
+      coding_language: '',
     }),
   });
 

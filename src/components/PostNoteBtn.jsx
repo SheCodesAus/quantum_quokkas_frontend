@@ -1,7 +1,7 @@
 import { NavLink, useOutletContext } from 'react-router-dom';
 import { useAuth } from '../hooks/use-auth';
 
-const PostNoteBtn = ({color, workshopTitle}) => {
+const PostNoteBtn = ({color, selectedWorkshop}) => {
     const { auth } = useAuth();
     const handleRedirect = useOutletContext();
 
@@ -15,7 +15,7 @@ const PostNoteBtn = ({color, workshopTitle}) => {
                             : 'bg-pink-light/95 border-pink-dark/60 shadow-pink-dark hover:shadow-pink-dark'
                     }`}
                     to='/newnote'
-                    state={{workshopTitle: workshopTitle}}
+                    state={{selectedWorkshop: selectedWorkshop}}
                 >
                     Post-A-Note
                 </NavLink>

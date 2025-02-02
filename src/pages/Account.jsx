@@ -1,4 +1,4 @@
-import { NavLink, Link, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import { useAuth } from '../hooks/use-auth';
 import useStatus from '../hooks/use-status';
 
@@ -8,27 +8,10 @@ const Account = () => {
 
     return (
         <main className='min-h-screen md:border-l-[1px] font-main border-green-dark md:ml-48 lg:ml-52 xl:ml-60'>
-            <h1 className='font-main text-3xl text-center'>
-                Welcome, {auth.firstName}
+            <h1 className='font-main font-light text-3xl text-center mb-6 md:text-left md:ml-8 lg:ml-12 md:pt-4'>
+                Welcome, {auth.firstName}!
             </h1>
-            <section className='border-t-[1px] border-b-[1px] border-green-dark py-5 flex justify-evenly mt-4'>
-                {/* Create Workshop */}
-                {isAdminOrSuper && (
-                    <Link
-                        className='border-[1px] font-accent text-lg lg:text-2xl py-2 px-5 rounded bg-green-dark/60 shadow-md shadow-green-dark'
-                        to='/newworkshop'
-                    >
-                        Add A Workshop
-                    </Link>
-                )}
-                <Link
-                    to=' /newnote'
-                    className='border-[1px] font-accent text-lg lg:text-2xl py-2 px-5 rounded bg-green-dark/60 shadow-md shadow-green-dark'
-                >
-                    Post-A-Note
-                </Link>
-            </section>
-            <section className='flex w-full justify-between px-3 py-4 text-lg font-light border-b-[1px] border-green-dark md:p-6 md:border-transparent md:text-xl lg:text-2xl lg:justify-around'>
+            <section className='flex w-full justify-between px-3 py-4 text-lg font-light border-b-[1px] border-green-dark md:px-6 md:border-transparent md:text-xl lg:justify-around relative z-100'>
                 <NavLink
                     to='/account/notes'
                     className={({ isActive }) =>
@@ -53,14 +36,14 @@ const Account = () => {
                     </NavLink>
                 )}
                 <NavLink
-                    to='/account/editprofile'
+                    to='/account/usersprofile'
                     className={({ isActive }) =>
                         isActive
                             ? 'border-[1px] p-1.5 rounded border-green-dark'
                             : 'border-[1px] p-1.5 border-transparent'
                     }
                 >
-                    Edit Profile
+                    Profile
                 </NavLink>
             </section>
             <section className='p-8'>

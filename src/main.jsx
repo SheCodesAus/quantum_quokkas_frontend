@@ -17,7 +17,7 @@ import NewNote from './pages/NewNote';
 import Note from './pages/Note';
 import UpdateNote from './pages/UpdateNote';
 import NewWorkshop from './pages/NewWorkshop';
-import UsersNotes from './components/UsersNotes';
+import UsersNotes from './components/EditNotesForm';
 import UsersWorkshops from './components/UsersWorkshops';
 import UsersProfile from './components/UsersProfile';
 import EditProfileForm from './components/EditProfileForm';

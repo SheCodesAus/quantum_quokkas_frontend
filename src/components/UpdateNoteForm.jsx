@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'; // Added useEffect
 import { useNavigate, useParams } from 'react-router-dom';
-import updateNote from '../api/put/put-note';
+import updateNote from '../api/put/put-edit-note';
 import pin from '/custom-btns/pin.svg';
 import useActiveWorkshops from '../hooks/use-active-workshops';
 import Loader from './Loader';

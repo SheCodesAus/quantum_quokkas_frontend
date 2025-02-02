@@ -1,4 +1,4 @@
-async function getWorkshops(first_name) {
+async function getWorkshops(userId) {
   const url = `${import.meta.env.VITE_API_URL}/workshops/`;
 
   const response = await fetch(url, { method: "GET" });
@@ -18,7 +18,7 @@ async function getWorkshops(first_name) {
   const workshops = await response.json();
 
   return workshops
-    .filter((workshop) => workshop.owner.first_name === first_name)
+    .filter((workshop) => workshop.owner.id === Number(userId))
     .sort((a, b) => new Date(b.start_date) - new Date(a.start_date));
 }
 

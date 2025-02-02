@@ -10,57 +10,61 @@ const SearchBar = ({
     placeholder,
 }) => {
     const navigate = useNavigate();
-    const inputRef = useRef(null)
-    const [currentWord, setCurrentWord] = useState('');
-    const [searchWords, setSearchWords] = useState([]);
+    const inputRef = useRef(null);
+    const [inputValue, setInputValue] = useState('');
+    const [originalList] = useState(list); // Store the original list
+    
+    // Common words to exclude from search
+    const commonWords = new Set(['and', 'or', 'the', 'a', 'an', 'in', 'on', 'at', 'to', 'for', 'of', 'with']);
 
-    // Convert search string to array of keywords, excluding common words
-    const parseSearchTerms = (searchString) => {
-        const commonWords = new Set(['and', 'or', 'the', 'a', 'an']);
-        return searchString
-            .toLowerCase()
+    // Parse input value into valid search words
+    const parseSearchWords = (input) => {
+        return input
             .split(' ')
-            .filter(word => word.trim() && !commonWords.has(word.trim()));
+            .filter(word => {
+                const trimmed = word.trim().toLowerCase();
+                return trimmed && !commonWords.has(trimmed);
+            });
     };
 
-    // Check if item matches all search terms
-    const matchesAllTerms = (item, searchTerms) => {
-        return searchTerms.every(term => 
-            filterByKeyword([item], term).length > 0
-        );
-    };
-
-
-    // set searchWord to what the user types in
-    // if the input field is cleared, refresh page
+    // Handle input changes
     const handleChange = (e) => {
-        setSearchWord(e.target.value);
-        if (e.target.value === '') {
-            navigate(0);
+        const newValue = e.target.value;
+        setInputValue(newValue);
+
+        // If input is cleared, restore original list
+        if (!newValue.trim()) {
+            filterFunc(originalList);
+        }
+    };
+
+    // Handle special keys
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleFilter();
         }
     };
 
     const handleFilter = () => {
         inputRef.current.blur();
-        const searchTerms = parseSearchTerms(searchWord);
         
-        // If no valid search terms, don't filter
-        if (searchTerms.length === 0) {
+        const searchWords = parseSearchWords(inputValue);
+
+        // If no search words, restore original list
+        if (searchWords.length === 0) {
+            filterFunc(originalList);
             return;
         }
 
-        // Filter list where item matches ALL search terms
-        const filteredList = list.filter(item => 
-            matchesAllTerms(item, searchTerms)
-        );
+        // Start with the full list
+        let filteredList = [...originalList];
+        
+        // Apply each search word as an additional filter (AND logic)
+        searchWords.forEach(word => {
+            filteredList = filterByKeyword(filteredList, word);
+        });
         
         filterFunc(filteredList);
-    };
-
-    const handleKeyDown = (e) => {
-        if (e.key === 'Enter') {
-            handleFilter();
-        }
     };
 
     return (
@@ -72,23 +76,25 @@ const SearchBar = ({
             }`}
         >
             <input
-            ref={inputRef}
+                ref={inputRef}
+                value={inputValue}
                 placeholder={placeholder}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
                 aria-description={placeholder}
                 type='search'
-                className={`focus-visible:outline-none bg-transparent w-56 font-light text-lg pl-1 lg:w-64`}
+                className="focus-visible:outline-none bg-transparent w-56 font-light text-lg pl-1 lg:w-64"
             />
 
             <button onClick={handleFilter}>
                 <img
                     src={image}
-                    className='size-8 bg-transparent my-2'
-                    alt=''
+                    className="size-8 bg-transparent my-2"
+                    alt=""
                 />
             </button>
         </section>
     );
 };
+
 export default SearchBar;

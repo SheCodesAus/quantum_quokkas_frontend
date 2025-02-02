@@ -20,9 +20,14 @@ const Workshops = () => {
     };
 
     const filterByKeyword = (listToFilter, wordToSearch) => {
-        return listToFilter.filter((item) =>
-            item.title.toLowerCase().includes(wordToSearch.toLowerCase())
-        );
+        return listToFilter.filter((item) => {
+            const lowerWord = wordToSearch.toLowerCase();
+            const lowerTitle = item.title.toLowerCase();
+            const lowerDescription = item.description.toLowerCase();
+            
+            return lowerTitle.includes(lowerWord) || 
+                   lowerDescription.includes(lowerWord);
+        });
     };
 
     if (isLoading) {

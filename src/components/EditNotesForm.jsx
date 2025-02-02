@@ -2,52 +2,51 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../hooks/use-auth";
 import { useNavigate } from "react-router-dom";
 import Loader from "./Loader";
-import getWorkshops from "../api/get/get-user-workshops";
-import putWorkshop from "../api/put/put-edit-workshop";
+import getNotes from "../api/get/get-user-notes";
+import updateNote from "../api/put/put-edit-note";
 import { formatDate } from "../utils/date-formatter";
 
-const EditWorkshop = () => {
+const EditNote = () => {
   const navigate = useNavigate();
   const { auth } = useAuth();
   const [editing, setEditing] = useState(false);
-  const [workshops, setWorkshops] = useState([]);
+  const [notes, setNotes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedWorkshop, setSelectedWorkshop] = useState(null);
+  const [selectedNote, setSelectedNote] = useState(null);
   const [originalContent, setOriginalContent] = useState(null);
 
   useEffect(() => {
-    const fetchWorkshops = async () => {
+    const fetchNotes = async () => {
       try {
-        const userWorkshops = await getWorkshops(auth.userId);
-        setWorkshops(userWorkshops);
+        const userNotes = await getNotes(auth.userId);
+        setNotes(userNotes);
         setIsLoading(false);
-        if (userWorkshops.length > 0) {
-          setSelectedWorkshop(userWorkshops[0]);
+        if (userNotes.length > 0) {
+          setSelectedNote(userNotes[0]);
         }
       } catch (error) {
-        console.error("Error fetching workshops:", error);
+        console.error("Error fetching notes:", error);
         setIsLoading(false);
       }
     };
 
     if (auth.userId) {
-      fetchWorkshops();
+      fetchNotes();
     }
   }, [auth.userId]);
 
   const handleEditing = () => {
     if (!editing) {
-      setOriginalContent(selectedWorkshop);
+      setOriginalContent(selectedNote);
     } else {
-      setSelectedWorkshop(originalContent);
+      setSelectedNote(originalContent);
     }
     setEditing(!editing);
   };
 
   const handleChange = (event) => {
     const { id, value, type, checked } = event.target;
-
-    setSelectedWorkshop((prev) => {
+    setSelectedNote((prev) => {
       if (type === "checkbox") {
         return {
           ...prev,
@@ -55,57 +54,55 @@ const EditWorkshop = () => {
           archive_reason: !checked ? "" : prev.archive_reason,
         };
       }
-
-      return {
-        ...prev,
-        [id]: value,
-      };
+      return { ...prev, [id]: value };
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await putWorkshop(selectedWorkshop, auth.token);
+      await updateNote(selectedNote, auth.token);
       navigate(0);
       setEditing(false);
     } catch (error) {
-      console.error("Error updating workshop:", error);
+      console.error("Error updating note:", error);
     }
   };
 
-  if (isLoading) {
-    return <Loader />;
-  }
+  if (isLoading) return <Loader />;
 
   return (
     <section className="space-y-4 font-main font-light">
-      <h1 className="text-xl">Your Workshops</h1>
-      {workshops.length === 0 ? (
-        <p>No workshops available.</p>
+      <h1 className="text-xl">Your Notes</h1>
+      {notes.length === 0 ? (
+        <p>No notes available.</p>
       ) : (
         <>
           <select
             className="text-xl py-1 w-full font-accent tracking-wider border-[1px] border-green-light rounded text-center bg-green-light/30 lg:w-80 lg:ml-8"
             onChange={(e) =>
-              setSelectedWorkshop(
-                workshops.find((w) => w.id === Number(e.target.value))
+              setSelectedNote(
+                notes.find((note) => note.id === Number(e.target.value))
               )
             }
-            value={selectedWorkshop?.id || ""}
+            value={selectedNote?.id || ""}
           >
-            {workshops.map((workshop) => (
-              <option key={workshop.id} value={workshop.id}>
-                {workshop.title}
+            {notes.map((note) => (
+              <option key={note.id} value={note.id}>
+                {note.content.substring(0, 20)}...
               </option>
             ))}
           </select>
 
           {!editing ? (
             <section className="space-y-3">
-              <p className="pl-4 lg:w-4/5">{selectedWorkshop?.description}</p>
+              <h2>
+                <strong>Workshop:</strong>{" "}
+                {selectedNote?.workshop_id?.title || "No Workshop"}
+              </h2>
+              <p className="pl-4 lg:w-4/5">{selectedNote?.content}</p>
               <h3 className="font-normal">
-                {formatDate(selectedWorkshop?.start_date)}
+                {formatDate(selectedNote?.date_created)}
               </h3>
               <div className="w-fit ml-auto lg:mx-auto">
                 <button
@@ -118,66 +115,47 @@ const EditWorkshop = () => {
             </section>
           ) : (
             <form className="grid grid-cols-3 gap-y-4" onSubmit={handleSubmit}>
-              <label htmlFor="title">Title</label>
-              <input
-                className="col-span-2 p-2 rounded row-start-2"
-                onChange={handleChange}
-                type="text"
-                id="title"
-                placeholder={selectedWorkshop?.title}
-              />
-
-              <label className="row-start-3" htmlFor="description">
-                Description
-              </label>
+              <h2>
+                <strong>Workshop:</strong>{" "}
+                {selectedNote?.workshop_id?.title || "No Workshop"}
+              </h2>
               <textarea
-                className="col-span-3 p-2 rounded row-start-4"
+                className="col-span-3 p-2 rounded row-start-2"
                 onChange={handleChange}
-                id="description"
+                id="content"
                 rows={5}
-                placeholder={selectedWorkshop?.description}
-                value={selectedWorkshop?.description || ""}
+                placeholder="Enter new content..."
+                value={selectedNote?.content || ""}
               />
 
-              <label className="row-start-5" htmlFor="start_date">
-                Date
-              </label>
-              <input
-                className="p-2 rounded row-start-6"
-                onChange={handleChange}
-                type="date"
-                id="start_date"
-                value={selectedWorkshop?.start_date?.split("T")[0] || ""}
-              />
-
-              <label className="row-start-7" htmlFor="is_archived">
+              <label className="row-start-3" htmlFor="is_archived">
                 Archive
               </label>
               <input
                 type="checkbox"
                 id="is_archived"
-                className="row-start-7 col-span-1"
-                checked={selectedWorkshop?.is_archived || false}
+                className="row-start-3 col-span-1"
+                checked={selectedNote?.is_archived || false}
                 onChange={handleChange}
               />
 
-              {selectedWorkshop?.is_archived && (
+              {selectedNote?.is_archived && (
                 <>
-                  <label className="row-start-8" htmlFor="archive_reason">
+                  <label className="row-start-4" htmlFor="archive_reason">
                     Archive Reason
                   </label>
                   <textarea
-                    className="col-span-3 p-2 rounded row-start-9"
+                    className="col-span-3 p-2 rounded row-start-5"
                     onChange={handleChange}
                     id="archive_reason"
                     rows={3}
                     placeholder="Enter archive reason..."
-                    value={selectedWorkshop?.archive_reason || ""}
+                    value={selectedNote?.archive_reason || ""}
                   />
                 </>
               )}
 
-              <div className="row-start-7 col-span-3 flex justify-evenly">
+              <div className="row-start-6 col-span-3 flex justify-evenly">
                 <button
                   className="py-1.5 px-3 rounded bg-green-dark/60 tracking-wide font-accent text-xl shadow-md shadow-green-dark md:text-2xl"
                   type="submit"
@@ -199,4 +177,4 @@ const EditWorkshop = () => {
   );
 };
 
-export default EditWorkshop;
+export default EditNote;

@@ -1,4 +1,4 @@
-async function getNotes() {
+async function getNotes(userId) {
     const url = `${import.meta.env.VITE_API_URL}/notes/`;
 
     const response = await fetch(url, {
@@ -20,8 +20,7 @@ async function getNotes() {
     const notes = await response.json();
 
     return notes
-    .filter((note) => !note.is_archived)
-    .sort((a, b) => new Date(b.date_created) - new Date(a.date_created));
+      .filter((note) => note.added_by_user.id === Number(userId));
 }
 
 export default getNotes;

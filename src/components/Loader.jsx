@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 import pink from '/note-icons/pink.png';
 import green from '/note-icons/green.png';

@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/use-auth.js';
-
 import z from 'zod';
-
 import postSignup from '../api/post/post-signup.js';
 import signup from '/note-icons/signup.png';
 import toast from 'react-hot-toast';

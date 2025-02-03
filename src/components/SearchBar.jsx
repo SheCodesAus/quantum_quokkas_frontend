@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const SearchBar = ({
     list,
@@ -9,7 +8,6 @@ const SearchBar = ({
     image,
     placeholder,
 }) => {
-    const navigate = useNavigate();
     const inputRef = useRef(null);
     const [inputValue, setInputValue] = useState('');
     const [originalList] = useState(list); // Store the original list

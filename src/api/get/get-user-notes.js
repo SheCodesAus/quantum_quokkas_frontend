@@ -1,4 +1,4 @@
-async function getNotes(userId) {
+async function getUsersNotes(userId) {
     const url = `${import.meta.env.VITE_API_URL}/notes/`;
 
     const response = await fetch(url, {
@@ -23,4 +23,4 @@ async function getNotes(userId) {
       .filter((note) => note.added_by_user.id === Number(userId));
 }
 
-export default getNotes;
+export default getUsersNotes;

@@ -6,7 +6,7 @@ export default function useStats() {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState();
 
-    useEffect(() => {
+    const fetchStats = () => {
         getStats()
             .then((stats) => {
                 setStats(stats);
@@ -16,6 +16,17 @@ export default function useStats() {
                 setError(error);
                 setIsLoading(false);
             });
+    }
+
+    useEffect(() => {
+        fetchStats()
+
+        const interval = setInterval(() => {
+            fetchStats()
+        //}, 30000) 30sec refresh
+        }, 120000) //2min refresh
+
+        return () => clearInterval(interval)
     }, []);
 
     return { stats, isLoading, error };

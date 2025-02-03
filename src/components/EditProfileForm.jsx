@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../hooks/use-auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useUser from '../hooks/use-user';
 import putUser from '../api/put/put-edit-profile';
 

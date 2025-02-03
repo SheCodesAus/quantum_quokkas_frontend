@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/use-auth';
-import useUser from '../hooks/use-user';
-import UsersDetails from './UsersDetails';
 import { useState } from 'react';
 import { IoArrowBackCircleOutline } from 'react-icons/io5';
-
+import useUser from '../hooks/use-user';
+import UsersDetails from './UsersDetails';
 import EditProfileForm from './EditProfileForm';
 
 const UsersProfile = () => {

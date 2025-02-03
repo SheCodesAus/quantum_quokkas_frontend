@@ -4,7 +4,7 @@ import postNewNote from '../api/post/post-new-note';
 import pin from '/custom-btns/pin.svg';
 import useActiveWorkshops from '../hooks/use-active-workshops';
 import Loader from './Loader';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import SelectWorkshop from './SelectWorkshop';
 import z from 'zod';
 

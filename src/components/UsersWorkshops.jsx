@@ -1,14 +1,14 @@
-import EditWorkshopForm from '../components/EditWorkshopForm';
 import { useAuth } from '../hooks/use-auth';
-import useStatus from '../hooks/use-status';
 import { Link } from 'react-router-dom';
+import useStatus from '../hooks/use-status';
+import EditWorkshopForm from '../components/EditWorkshopForm';
 
 const UsersWorkshops = () => {
     const { auth } = useAuth();
     const { isAdminOrSuper } = useStatus(auth.userId);
     return (
-        <main className='space-y-10 lg:-space-y-0 lg:grid grid-cols-2'>
-            <div className='w-fit mx-auto lg:my-auto xl:mx-0 lg:row-start-1 lg:col-start-2'>
+        <main className='space-y-10 lg:-space-y-0 lg:grid grid-cols-2 xl:ml-24'>
+            <div className='w-fit mx-auto lg:my-12 xl:mx-0 lg:row-start-1 lg:col-start-2'>
                 {/* Create Workshop */}
                 {isAdminOrSuper && (
                     <Link

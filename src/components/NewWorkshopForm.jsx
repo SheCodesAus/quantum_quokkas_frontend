@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import postNewWorkshop from '../api/post/post-new-workshop';
+import toast from 'react-hot-toast';
 
 function NewWorkshopForm() {
     const navigate = useNavigate();
@@ -42,13 +43,13 @@ function NewWorkshopForm() {
                     navigate(`/workshop/${response.id}`);
                 })
                 .catch((error) => {
-                    console.error('Failed to create workshop:', error);
+                    toast(error.message)
                 });
         }
     };
 
     return (
-        <main className='min-h-screen w-fit mx-auto font-main md:ml-48 md:mt-2 lg:ml-56 lg:mt-12 xl:ml-72'>
+        <main className='min-h-screen w-fit mx-auto font-main md:ml-48 md:mt-2 lg:ml-56 lg:mt-12 xl:mx-auto'>
             <h1 className='font-accent tracking-wider text-2xl text-center mb-4 lg:text-3xl'>
                 Create New Workshop
             </h1>
@@ -105,64 +106,9 @@ function NewWorkshopForm() {
                     />
                 </div>
 
-                {/* Image URL */}
-                {/* <div>
-                  <label htmlFor='image_url'>Image URL:</label>
-                  <input
-                      type='url'
-                      id='image_url'
-                      onChange={handleChange}
-                      value={workshopData.image_url}
-                  />
-              </div> */}
-
-                {/* Location */}
-                {/* <div>
-                  <label htmlFor='location'>Location:</label>
-                  <input
-                      type='text'
-                      id='location'
-                      onChange={handleChange}
-                      value={workshopData.location}
-                  />
-              </div> */}
-
-                {/* Category */}
-                {/* <div>
-                  <label htmlFor='category'>Category:</label>
-                  <input
-                      type='text'
-                      id='category'
-                      onChange={handleChange}
-                      value={workshopData.category}
-                  />
-              </div> */}
-
-                {/* Coding Language */}
-                {/* <div>
-                  <label htmlFor='coding_language'>Coding Language:</label>
-                  <input
-                      type='text'
-                      id='coding_language'
-                      onChange={handleChange}
-                      value={workshopData.coding_language}
-                  />
-              </div> */}
-
-                {/* Organisation */}
-                {/* <div>
-                  <label htmlFor='organisation'>Organisation:</label>
-                  <input
-                      type='text'
-                      id='organisation'
-                      onChange={handleChange}
-                      value={workshopData.organisation}
-                  />
-              </div> */}
-
                 {/* Submit Button */}
                 <button
-                    className='md:row-start-4 md:col-span-2 w-fit mx-auto py-2 px-6 rounded bg-blue-light font-bold font-accent text-2xl shadow-md shadow-blue-dark mb-8 md:text-3xl md:mt-10'
+                    className='md:row-start-4 md:col-span-2 w-fit mx-auto py-2 px-6 rounded bg-blue-light tracking-wider font-accent text-2xl shadow-md shadow-blue-dark mb-8 md:text-3xl md:mt-10'
                     type='submit'
                 >
                     Create

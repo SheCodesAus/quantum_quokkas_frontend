@@ -100,7 +100,7 @@ const Nav = () => {
                     showNav ? 'hidden' : 'min-h-screen mt-10 md:mt-36 lg:mt-20'
                 }`}
             >
-                <Outlet context={{ handleRedirect, handleLogout }} />
+                <Outlet context={handleRedirect} />
             </section>
             <Footer />
             <ScrollRestoration />

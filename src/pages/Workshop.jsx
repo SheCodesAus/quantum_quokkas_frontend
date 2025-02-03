@@ -7,7 +7,6 @@ import SearchBar from '../components/SearchBar';
 import PostNoteBtn from '../components/PostNoteBtn';
 import PostNoteCard from '../components/PostNoteCard';
 import ErrorPage from './ErrorPage';
-
 import pink from '/custom-btns/pink-search.svg';
 
 const Workshop = () => {
@@ -82,7 +81,7 @@ const Workshop = () => {
                     {canPostNote ? (
                         // Workshop accepting notes
                         <PostNoteBtn
-                            workshopTitle={workshop?.title}
+                            selectedWorkshop={workshop}
                             color='pink'
                         />
                     ) : (

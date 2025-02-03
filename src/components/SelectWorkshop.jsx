@@ -24,7 +24,7 @@ const SelectWorkshop = ({
         const title = e.target.getAttribute('data-title');
         setNoteData({
             ...noteData,
-            workshop: choice,
+            workshop: Number(choice),
         });
         setSelectMenuTitle(title);
         setChoosingWorkshop(false);

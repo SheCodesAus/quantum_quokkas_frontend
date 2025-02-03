@@ -1,12 +1,7 @@
 async function getNote(noteId) {
     const url = `${import.meta.env.VITE_API_URL}/notes/${noteId}/`;
-    const token = window.localStorage.getItem("token");
-
-    const response = await fetch(url, { 
+    const response = await fetch(url, {
         method: 'GET',
-        headers: {
-            'Authorization': `Token ${token}`,
-        } 
     });
 
     if (!response.ok) {

@@ -27,6 +27,7 @@ export default {
             backgroundImage: {
                 'hero' : "url('/note-icons/purple.png')",
                 'note' : "url('/note-icons/pink-blank.png')",
+                'usersnote' : "url('/note-icons/green-blank.png')",
                 'noteform' : "url('/note-icons/yellow.png')",
                 'error-note' : "url('/note-icons/error.png')",
             }

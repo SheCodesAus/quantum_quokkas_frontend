@@ -6,7 +6,6 @@ import SearchBar from '../components/SearchBar';
 import WorkshopCard from '../components/WorkshopCard';
 import orange from '/custom-btns/orange-search.svg';
 import ErrorPage from './ErrorPage';
-import { useState } from 'react';
 import useStatus from '../hooks/use-status';
 
 const Workshops = () => {
@@ -20,9 +19,16 @@ const Workshops = () => {
     };
 
     const filterByKeyword = (listToFilter, wordToSearch) => {
-        return listToFilter.filter((item) =>
-            item.title.toLowerCase().includes(wordToSearch.toLowerCase())
-        );
+        return listToFilter.filter((item) => {
+            const lowerWord = wordToSearch.toLowerCase();
+            const lowerTitle = item.title.toLowerCase();
+            const lowerDescription = item.description.toLowerCase();
+
+            return (
+                lowerTitle.includes(lowerWord) ||
+                lowerDescription.includes(lowerWord)
+            );
+        });
     };
 
     if (isLoading) {
@@ -43,12 +49,11 @@ const Workshops = () => {
                 </span>
                 ivity Workshops
             </h1>
-            
             {/* Add Workshop Btn */}
-            {isAdminOrSuper && <AddWorkshopButton />}
+            <div className='w-fit mx-auto space-y-4 md:flex md:space-y-0 md:gap-6 lg:gap-24'>
+                {isAdminOrSuper && <AddWorkshopButton />}
 
-            {/* Searchbar */}
-            <div className='w-fit mx-auto lg:mx-0 lg:ml-16'>
+                {/* Searchbar */}
                 <SearchBar
                     list={workshops}
                     filterFunc={filterWorkshops}

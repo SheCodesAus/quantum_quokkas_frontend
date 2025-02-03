@@ -5,6 +5,19 @@ import pin from '/custom-btns/pin.svg';
 
 const WorkshopCard = ({ workshops, color, truncate }) => {
 
+    const checkForZero = (length) => {
+        if (length > 0) {
+            return (
+                <div className='flex gap-2'>
+                    <img src={pin} className='w-5' alt='' />
+                    <p className='font-light'>
+                        {length} notes posted
+                    </p>
+                </div>
+            );
+        } else return null
+    }
+
     return (
         <>
             {workshops.map((workshop) => {
@@ -26,10 +39,11 @@ const WorkshopCard = ({ workshops, color, truncate }) => {
                             Hosted by {workshop?.owner?.first_name}
                         </h3>
                         {/* Notes Total */}
-                        <div className='flex gap-2'>
+                        {/* <div className='flex gap-2'>
                             <img src={pin} className='w-5' alt='' />
                             <p className='font-light'>{workshop?.notes.length} notes posted</p>
-                        </div>
+                        </div> */}
+                        {checkForZero(workshop?.notes.length)}
                         {/* Description */}
                         <p
                             className={`${

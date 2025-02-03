@@ -4,13 +4,19 @@ import postNewNote from '../api/post/post-new-note';
 import pin from '/custom-btns/pin.svg';
 import useActiveWorkshops from '../hooks/use-active-workshops';
 import Loader from './Loader';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import SelectWorkshop from './SelectWorkshop';
+import z from 'zod';
+
+const newNoteSchema = z.object({
+    content: z.string().min(5, 'Add your win'),
+    workshop: z.number().min(1, 'Which workshop would you like to post to?'),
+    anonymous: z.boolean(),
+});
 
 function NewNoteForm() {
     const location = useLocation();
-    const { workshopTitle } = location.state ? location.state : ''
-
+    const { selectedWorkshop } = location.state ? location.state : '';
     const { workshops, isLoading } = useActiveWorkshops();
     const [characterCounter, setCharacterCounter] = useState('0');
 
@@ -18,10 +24,8 @@ function NewNoteForm() {
 
     const [noteData, setNoteData] = useState({
         content: '',
-        workshop: '',
+        workshop: selectedWorkshop?.id,
         anonymous: false,
-        note_category: '',
-        coding_language: '',
     });
 
     const handleChange = (e) => {
@@ -42,22 +46,23 @@ function NewNoteForm() {
         setCharacterCounter(e.target.value.length);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const requiredFields = ['content', 'workshop'];
-        const isFormValid = requiredFields.every(
-            (field) => noteData[field].trim() !== ''
-        );
+        const result = newNoteSchema.safeParse(noteData);
 
-        if (isFormValid) {
+        if (!result.success) {
+            const error = result.error.errors?.[0];
+            if (error) {
+                toast(error.message);
+            }
+            return;
+        } else {
             postNewNote(noteData)
                 .then(() => {
                     navigate(`/workshop/${noteData.workshop}`);
-                    toast('Posting your note!');
                 })
                 .catch((error) => {
                     toast(error.message);
-                    navigate('/');
                 });
         }
     };
@@ -68,7 +73,6 @@ function NewNoteForm() {
 
     return (
         <main className='min-h-screen font-main md:mt-8 md:items-start md:ml-60 lg:grid lg:grid-cols-2 lg:w-3/5 lg:ml-40 lg:mt-16 xl:mt-16'>
-            <Toaster />
             <h1 className='font-accent tracking-wider mb-6 text-3xl text-center md:text-start md:text-4xl lg:text-center lg:mb-0 lg:pt-10'>
                 Post-A-Note
             </h1>
@@ -83,7 +87,7 @@ function NewNoteForm() {
                         workshops={workshops}
                         noteData={noteData}
                         setNoteData={setNoteData}
-                        workshopTitle={workshopTitle}
+                        workshopTitle={selectedWorkshop?.title}
                     />
                 </div>
 

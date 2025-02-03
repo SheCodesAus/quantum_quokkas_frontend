@@ -17,9 +17,9 @@ async function getWorkshops() {
 
     const workshops = await response.json();
 
-    return workshops.sort(
-        (a, b) => new Date(b.start_date) - new Date(a.start_date)
-    );
+    return workshops
+    .filter((workshop) => !workshop.is_archived)
+    .sort((a, b) => new Date(b.start_date) - new Date(a.start_date));
 }
 
 export default getWorkshops;

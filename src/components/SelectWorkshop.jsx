@@ -34,9 +34,9 @@ const SelectWorkshop = ({
         <div className='bg-white rounded shadow-md shadow-gray-700 font-main'>
             {/* Drop Down Menu Container */}
             <div className='bg-yellow-light/20'>
-                <button
+                <div
                     onClick={toggleDropdown}
-                    className='flex items-center justify-evenly w-72 font-main text-xl font-light bg-yellow-light/90 py-3 md:w-80'
+                    className='cursor-pointer flex items-center justify-evenly w-72 font-main text-xl font-light bg-yellow-light/90 py-3 md:w-80'
                 >
                     {selectMenuTitle}
                     {choosingWorkshop ? (
@@ -44,7 +44,7 @@ const SelectWorkshop = ({
                     ) : (
                         <HiOutlineChevronDoubleDown onClick={toggleDropdown} />
                     )}
-                </button>
+                </div>
             </div>
             <ul
                 role='menu'

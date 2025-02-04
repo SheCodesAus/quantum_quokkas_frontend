@@ -1,30 +1,22 @@
 import { useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import postNewNote from '../api/post/post-new-note';
 import pin from '/custom-btns/pin.svg';
 import useActiveWorkshops from '../hooks/use-active-workshops';
 import Loader from './Loader';
 import toast from 'react-hot-toast';
 import SelectWorkshop from './SelectWorkshop';
-import z from 'zod';
-
-const newNoteSchema = z.object({
-    content: z.string().min(5, 'Add your win'),
-    workshop: z.number().min(1, 'Which workshop would you like to post to?'),
-    anonymous: z.boolean(),
-});
 
 function NewNoteForm() {
     const location = useLocation();
     const { selectedWorkshop } = location.state ? location.state : '';
     const { workshops, isLoading } = useActiveWorkshops();
-    const [characterCounter, setCharacterCounter] = useState('0');
-
+    const [characterCounter, setCharacterCounter] = useState(0);
     const navigate = useNavigate();
 
     const [noteData, setNoteData] = useState({
         content: '',
-        workshop: selectedWorkshop?.id,
+        workshop: selectedWorkshop?.id || '',
         anonymous: false,
     });
 
@@ -35,8 +27,8 @@ function NewNoteForm() {
             [id]:
                 type === 'checkbox'
                     ? checked
-                    : type === 'number'
-                    ? Number(value)
+                    : id === 'workshop'
+                    ? Number(value) || ''
                     : value,
         }));
     };
@@ -48,22 +40,21 @@ function NewNoteForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const result = newNoteSchema.safeParse(noteData);
 
-        if (!result.success) {
-            const error = result.error.errors?.[0];
-            if (error) {
-                toast(error.message);
-            }
+        if (!noteData.workshop) {
+            toast('Please select a workshop');
             return;
-        } else {
-            postNewNote(noteData)
-                .then(() => {
-                    navigate(`/workshop/${noteData.workshop}`);
-                })
-                .catch((error) => {
-                    toast(error.message);
-                });
+        }
+        if (noteData.content.length < 3) {
+            toast('Please add more description to your win!');
+            return;
+        }
+
+        try {
+            await postNewNote(noteData);
+            navigate(`/workshop/${noteData.workshop}`);
+        } catch (error) {
+            toast(error.message);
         }
     };
 
